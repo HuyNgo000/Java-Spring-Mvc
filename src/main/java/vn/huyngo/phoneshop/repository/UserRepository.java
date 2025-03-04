@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<NGUOIDUNG, Long> {
 
     NGUOIDUNG findById(long id);
 
+    void deleteById(long id);
+
 }

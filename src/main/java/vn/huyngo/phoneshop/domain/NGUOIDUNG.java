@@ -1,9 +1,14 @@
 package vn.huyngo.phoneshop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +21,14 @@ public class NGUOIDUNG {
     private String hoTen;
     private String diaChi;
     private String sdt;
+    private String anhDaiDien;
+
+    @ManyToOne
+    @JoinColumn(name = "id_vaitro")
+    private VAITRO vaitro;
+
+    @OneToMany(mappedBy = "nguoidung")
+    private List<DONHANG> donhang;
 
     public long getId() {
         return id;
@@ -65,10 +78,18 @@ public class NGUOIDUNG {
         this.sdt = sdt;
     }
 
+    public String getAnhDaiDien() {
+        return anhDaiDien;
+    }
+
+    public void setAnhDaiDien(String anhdaidien) {
+        this.anhDaiDien = anhdaidien;
+    }
+
     @Override
     public String toString() {
         return "NGUOIDUNG [id=" + id + ", email=" + email + ", matKhau=" + matKhau + ", hoTen=" + hoTen + ", diaChi="
-                + diaChi + ", sdt=" + sdt + "]";
+                + diaChi + ", sdt=" + sdt + ", anhDaiDien=" + anhDaiDien + "]";
     }
 
 }
