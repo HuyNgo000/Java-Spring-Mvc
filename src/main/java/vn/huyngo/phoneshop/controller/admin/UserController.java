@@ -1,4 +1,4 @@
-package vn.huyngo.phoneshop.controller;
+package vn.huyngo.phoneshop.controller.admin;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +38,7 @@ public class UserController {
     public String geTabletUserPage(Model model) {
         List<NGUOIDUNG> users = this.userService.GetAllUser();
         model.addAttribute("users", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/create")
@@ -52,14 +52,14 @@ public class UserController {
         NGUOIDUNG user = this.userService.GetUserDetail(id);
         model.addAttribute("user", user);
         model.addAttribute("id", id);
-        return "admin/user/user-detail";
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/update/{id}")
     public String getUserUpdatePage(Model model, @PathVariable Long id) {
         NGUOIDUNG currentUser = this.userService.GetUserDetail(id);
         model.addAttribute("updateUser", currentUser);
-        return "admin/user/user-update";
+        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
@@ -85,7 +85,7 @@ public class UserController {
     public String getUserDeletePage(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
         model.addAttribute("deleteUser", new NGUOIDUNG());
-        return "/admin/user/user-delete";
+        return "/admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")
