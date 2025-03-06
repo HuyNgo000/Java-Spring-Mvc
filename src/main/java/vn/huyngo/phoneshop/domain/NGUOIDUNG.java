@@ -27,6 +27,22 @@ public class NGUOIDUNG {
     @JoinColumn(name = "id_vaitro")
     private VAITRO vaitro;
 
+    public VAITRO getVaitro() {
+        return vaitro;
+    }
+
+    public void setVaitro(VAITRO vaitro) {
+        this.vaitro = vaitro;
+    }
+
+    public List<DONHANG> getDonhang() {
+        return donhang;
+    }
+
+    public void setDonhang(List<DONHANG> donhang) {
+        this.donhang = donhang;
+    }
+
     @OneToMany(mappedBy = "nguoidung")
     private List<DONHANG> donhang;
 
