@@ -12,6 +12,17 @@
                 <meta name="author" content="Hỏi Dân IT" />
                 <title>Update User</title>
                 <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
@@ -27,10 +38,10 @@
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Update user</li>
                                 </ol>
-                                <div class="container mt-5">
+                                <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a user</h3>
+                                            <h3>Update user</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/update"
                                                 modelAttribute="updateUser">
@@ -55,12 +66,31 @@
                                                     <form:input type="text" path="hoTen" Class="form-control" />
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12">
                                                     <label class="form-label">Address</label>
                                                     <form:input type="text" path="diaChi" Class="form-control" />
                                                 </div>
 
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <!-- <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Vai Trò</label>
+                                                    <form:select class="form-select" path="vaitro.ten">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+
+                                                </div> -->
+
+                                                <!-- <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        name="hoidanitFile" accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview">
+                                                </div> -->
+
+                                                <button type="submit" class="btn btn-warning mb-3">Update</button>
                                             </form:form>
                                         </div>
                                     </div>

@@ -42,6 +42,7 @@
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Full Name</th>
+                                                        <th scope="col">Role</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -51,6 +52,7 @@
                                                             <td>${user.id}</td>
                                                             <td>${user.email}</td>
                                                             <td>${user.hoTen}</td>
+                                                            <td>${user.vaitro.ten}</td>
                                                             <td><a href="/admin/user/${user.id}"
                                                                     class="btn btn-success">View</a>
                                                                 <a href="/admin/user/update/${user.id}"

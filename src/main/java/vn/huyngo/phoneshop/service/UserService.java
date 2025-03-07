@@ -1,20 +1,20 @@
 package vn.huyngo.phoneshop.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
 import org.springframework.stereotype.Service;
-
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
+import vn.huyngo.phoneshop.domain.VAITRO;
+import vn.huyngo.phoneshop.repository.RoleRepository;
 import vn.huyngo.phoneshop.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public String handleHello() {
@@ -39,5 +39,9 @@ public class UserService {
 
     public void DeleteUser(long id) {
         this.userRepository.deleteById(id);
+    }
+
+    public VAITRO getRoleByName(String name) {
+        return this.roleRepository.findByTen(name);
     }
 }
