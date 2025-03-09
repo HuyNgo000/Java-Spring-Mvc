@@ -9,26 +9,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "DONHANG")
 public class DONHANG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long maDonHang;
     private Double tongGia;
     @ManyToOne
-    @JoinColumn(name = "id_nguoidung")
-    private NGUOIDUNG nguoidung;
+    @JoinColumn(name = "maNguoiDung")
+    private NGUOIDUNG nguoiDung;
 
-    @OneToMany(mappedBy = "donhang")
-    private List<CHITIETDONHANG> chitietdonhang;
+    @OneToMany(mappedBy = "donHang")
+    private List<CHITIETDONHANG> chiTietDonHang;
 
-    public Long getId() {
-        return id;
+    public Long getMaDonHang() {
+        return maDonHang;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMaDonHang(Long maDonHang) {
+        this.maDonHang = maDonHang;
     }
 
     public Double getTongGia() {
@@ -39,9 +41,26 @@ public class DONHANG {
         this.tongGia = tongGia;
     }
 
+    public NGUOIDUNG getNguoiDung() {
+        return nguoiDung;
+    }
+
+    public void setNguoiDung(NGUOIDUNG nguoiDung) {
+        this.nguoiDung = nguoiDung;
+    }
+
+    public List<CHITIETDONHANG> getChiTietDonHang() {
+        return chiTietDonHang;
+    }
+
+    public void setChiTietDonHang(List<CHITIETDONHANG> chiTietDonHang) {
+        this.chiTietDonHang = chiTietDonHang;
+    }
+
     @Override
     public String toString() {
-        return "DONHANG [id=" + id + ", tongGia=" + tongGia + "]";
+        return "DONHANG [maDonHang=" + maDonHang + ", tongGia=" + tongGia + ", nguoiDung=" + nguoiDung
+                + ", chiTietDonHang=" + chiTietDonHang + "]";
     }
 
 }

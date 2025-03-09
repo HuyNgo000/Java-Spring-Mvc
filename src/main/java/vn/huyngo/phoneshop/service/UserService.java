@@ -29,12 +29,12 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    public NGUOIDUNG handleSaveUser(NGUOIDUNG nguoidung) {
-        return this.userRepository.save(nguoidung);
+    public NGUOIDUNG handleSaveUser(NGUOIDUNG nguoiDung) {
+        return this.userRepository.save(nguoiDung);
     }
 
     public NGUOIDUNG GetUserDetail(long id) {
-        return this.userRepository.findById(id);
+        return this.userRepository.findByMaNguoiDung(id);
     }
 
     public void DeleteUser(long id) {

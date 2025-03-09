@@ -6,24 +6,23 @@
                     <div class="d-flex justify-content-between">
                         <div class="top-info ps-2">
                             <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-                                    class="text-white">123 Street, New York</a></small>
+                                    class="text-white">62 Nguyễn Tất Thành, Đắk Mâm, Krông Nô, Đắk Nông</a></small>
                             <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-                                    class="text-white">Email@Example.com</a></small>
+                                    class="text-white">huyngo080582@gmail.com</a></small>
                         </div>
-                        <div class="top-link pe-2">
-                            <a href="#" class="text-white"><small class="text-white mx-2">Privacy
-                                    Policy</small>/</a>
-                            <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                            <a href="#" class="text-white"><small class="text-white ms-2">Sales and
-                                    Refunds</small></a>
-                        </div>
+
                     </div>
                 </div>
                 <div class="container px-0">
                     <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                        <a href="index.html" class="navbar-brand">
-                            <h1 class="text-primary display-6">Fruitables</h1>
-                        </a>
+                        <div class="container">
+                            <a class="navbar-brand brand-logo" href="index.html">
+                                🌟 T<span class="lightning-icon"><i class="bi bi-lightning-fill"></i></span>N I Mobile
+                            </a>
+                        </div>
+                        <!-- <a href="index.html" class="navbar-brand">
+                            <h1 class="text-primary display-6">Toan Ngoc I Mobile</h1>
+                        </a> -->
                         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarCollapse">
                             <span class="fa fa-bars text-primary"></span>

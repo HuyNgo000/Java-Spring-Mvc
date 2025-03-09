@@ -1,18 +1,18 @@
 package vn.huyngo.phoneshop.domain;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "SANPHAM")
 public class SANPHAM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long maSanPham;
     private String ten;
     private Double gia;
     private String hinhAnh;
@@ -23,12 +23,12 @@ public class SANPHAM {
     private String noiSanXuat;
     private String mucTieu;
 
-    public Long getId() {
-        return id;
+    public Long getMaSanPham() {
+        return maSanPham;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMaSanPham(Long maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
     public String getTen() {
@@ -105,9 +105,9 @@ public class SANPHAM {
 
     @Override
     public String toString() {
-        return "SANPHAM [id=" + id + ", ten=" + ten + ", gia=" + gia + ", hinhAnh=" + hinhAnh + ", moTaChiTiet="
-                + moTaChiTiet + ", moTaNgan=" + moTaNgan + ", soLuong=" + soLuong + ", daBan=" + daBan + ", noiSanXuat="
-                + noiSanXuat + ", mucTieu=" + mucTieu + "]";
+        return "SANPHAM [maSanPham=" + maSanPham + ", ten=" + ten + ", gia=" + gia + ", hinhAnh=" + hinhAnh
+                + ", moTaChiTiet=" + moTaChiTiet + ", moTaNgan=" + moTaNgan + ", soLuong=" + soLuong + ", daBan="
+                + daBan + ", noiSanXuat=" + noiSanXuat + ", mucTieu=" + mucTieu + "]";
     }
 
 }

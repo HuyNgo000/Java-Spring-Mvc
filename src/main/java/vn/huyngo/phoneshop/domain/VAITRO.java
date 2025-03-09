@@ -7,24 +7,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "VAITRO")
 public class VAITRO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long maVaiTro;
     private String ten;
-    private String mota;
+    private String moTa;
 
-    @OneToMany(mappedBy = "vaitro")
-    private List<NGUOIDUNG> nguoidung;
+    @OneToMany(mappedBy = "vaiTro")
+    private List<NGUOIDUNG> nguoiDung;
 
-    public long getId() {
-        return id;
+    public long getMaVaiTro() {
+        return maVaiTro;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setMaVaiTro(long maVaiTro) {
+        this.maVaiTro = maVaiTro;
     }
 
     public String getTen() {
@@ -35,17 +37,25 @@ public class VAITRO {
         this.ten = ten;
     }
 
-    public String getMota() {
-        return mota;
+    public String getMoTa() {
+        return moTa;
     }
 
-    public void setMota(String mota) {
-        this.mota = mota;
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public List<NGUOIDUNG> getNguoiDung() {
+        return nguoiDung;
+    }
+
+    public void setNguoiDung(List<NGUOIDUNG> nguoiDung) {
+        this.nguoiDung = nguoiDung;
     }
 
     @Override
     public String toString() {
-        return "VAITRO [id=" + id + ", ten=" + ten + ", mota=" + mota + "]";
+        return "VAITRO [maVaiTro=" + maVaiTro + ", ten=" + ten + ", moTa=" + moTa + ", nguoiDung=" + nguoiDung + "]";
     }
 
 }

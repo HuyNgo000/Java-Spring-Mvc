@@ -6,29 +6,31 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "CHITIETDONHANG")
 public class CHITIETDONHANG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long maChiTietDonHang;
     private Long soluong;
     private double gia;
 
     @ManyToOne
-    @JoinColumn(name = "id_donhang")
-    private DONHANG donhang;
+    @JoinColumn(name = "maDonHang")
+    private DONHANG donHang;
 
     @ManyToOne
-    @JoinColumn(name = "id_sanpham")
-    private SANPHAM sanpham;
+    @JoinColumn(name = "maSanPham")
+    private SANPHAM sanPham;
 
-    public Long getId() {
-        return id;
+    public Long getMaChiTietDonHang() {
+        return maChiTietDonHang;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMaChiTietDonHang(Long maChiTietDonHang) {
+        this.maChiTietDonHang = maChiTietDonHang;
     }
 
     public Long getSoluong() {
@@ -47,26 +49,26 @@ public class CHITIETDONHANG {
         this.gia = gia;
     }
 
-    public DONHANG getDonhang() {
-        return donhang;
+    public DONHANG getDonHang() {
+        return donHang;
     }
 
-    public void setDonhang(DONHANG donhang) {
-        this.donhang = donhang;
+    public void setDonHang(DONHANG donHang) {
+        this.donHang = donHang;
     }
 
-    public SANPHAM getSanpham() {
-        return sanpham;
+    public SANPHAM getSanPham() {
+        return sanPham;
     }
 
-    public void setSanpham(SANPHAM sanpham) {
-        this.sanpham = sanpham;
+    public void setSanPham(SANPHAM sanPham) {
+        this.sanPham = sanPham;
     }
 
     @Override
     public String toString() {
-        return "CHITIETDONHANG [id=" + id + ", soluong=" + soluong + ", gia=" + gia + ", donhang=" + donhang
-                + ", sanpham=" + sanpham + "]";
+        return "CHITIETDONHANG [maChiTietDonHang=" + maChiTietDonHang + ", soluong=" + soluong + ", gia=" + gia
+                + ", donHang=" + donHang + ", sanPham=" + sanPham + "]";
     }
 
 }

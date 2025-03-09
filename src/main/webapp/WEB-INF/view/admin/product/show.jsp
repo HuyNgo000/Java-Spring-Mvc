@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager User</title>
+                <title>Dashboard - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -22,42 +22,42 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Manager product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-12 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h2>Table user</h3>
-                                                    <a href="/admin/user/create" class="btn btn-primary">Create a
-                                                        user</a>
+                                                <h2>Table product</h3>
+                                                    <a href="/admin/product/create" class="btn btn-primary">Create a
+                                                        product</a>
                                             </div>
                                             <hr />
                                             <table class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">ID</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Full Name</th>
-                                                        <th scope="col">Role</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Factory</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach var="user" items="${users}">
+                                                    <c:forEach var="product" items="${products}">
                                                         <tr>
-                                                            <td>${user.maNguoiDung}</td>
-                                                            <td>${user.email}</td>
-                                                            <td>${user.hoTen}</td>
-                                                            <td>${user.vaiTro.ten}</td>
-                                                            <td><a href="/admin/user/${user.maNguoiDung}"
+                                                            <td>${product.maSanPham}</td>
+                                                            <td>${product.ten}</td>
+                                                            <td>${product.gia}</td>
+                                                            <td>${product.noiSanXuat}</td>
+                                                            <td><a href="/admin/user/${product.maSanPham}"
                                                                     class="btn btn-success">View</a>
-                                                                <a href="/admin/user/update/${user.maNguoiDung}"
+                                                                <a href="/admin/user/update/${product.maSanPham}"
                                                                     class="btn btn-warning mx-2">Update</a>
-                                                                <a href="/admin/user/delete/${user.maNguoiDung}"
+                                                                <a href="/admin/user/delete/${product.maSanPham}"
                                                                     class="btn btn-danger">Delete</a>
                                                             </td>
                                                         </tr>

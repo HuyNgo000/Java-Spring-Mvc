@@ -27,9 +27,9 @@
             </head>
 
             <body class="sb-nav-fixed">
-                <jsp:include page="../user/layout/header.jsp" />
+                <jsp:include page="../layout/header.jsp" />
                 <div id="layoutSidenav">
-                    <jsp:include page="../user/layout/sidebar.jsp" />
+                    <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
@@ -47,7 +47,7 @@
                                                 modelAttribute="updateUser">
                                                 <div class="mb-3" style="display: none;">
                                                     <label class="form-label">ID</label>
-                                                    <form:input type="text" path="id" Class="form-control" />
+                                                    <form:input type="text" path="maNguoiDung" Class="form-control" />
                                                 </div>
 
                                                 <div class="mb-3">
@@ -70,26 +70,6 @@
                                                     <label class="form-label">Address</label>
                                                     <form:input type="text" path="diaChi" Class="form-control" />
                                                 </div>
-
-                                                <!-- <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Vai Trò</label>
-                                                    <form:select class="form-select" path="vaitro.ten">
-                                                        <form:option value="ADMIN">ADMIN</form:option>
-                                                        <form:option value="USER">USER</form:option>
-                                                    </form:select>
-
-                                                </div> -->
-
-                                                <!-- <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Avatar</label>
-                                                    <input class="form-control" type="file" id="avatarFile"
-                                                        name="hoidanitFile" accept=".png, .jpg, .jpeg" />
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
-                                                        id="avatarPreview">
-                                                </div> -->
-
                                                 <button type="submit" class="btn btn-warning mb-3">Update</button>
                                             </form:form>
                                         </div>
@@ -97,7 +77,7 @@
                                 </div>
                             </div>
                         </main>
-                        <jsp:include page="../user/layout/footer.jsp" />
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

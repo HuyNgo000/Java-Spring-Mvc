@@ -12,10 +12,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "NGUOIDUNG")
 public class NGUOIDUNG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long maNguoiDung;
     private String email;
     private String matKhau;
     private String hoTen;
@@ -24,34 +25,18 @@ public class NGUOIDUNG {
     private String anhDaiDien;
 
     @ManyToOne
-    @JoinColumn(name = "id_vaitro")
-    private VAITRO vaitro;
+    @JoinColumn(name = "maVaiTro")
+    private VAITRO vaiTro;
 
-    public VAITRO getVaitro() {
-        return vaitro;
+    @OneToMany(mappedBy = "nguoiDung")
+    private List<DONHANG> donHang;
+
+    public long getMaNguoiDung() {
+        return maNguoiDung;
     }
 
-    public void setVaitro(VAITRO vaitro) {
-        this.vaitro = vaitro;
-    }
-
-    public List<DONHANG> getDonhang() {
-        return donhang;
-    }
-
-    public void setDonhang(List<DONHANG> donhang) {
-        this.donhang = donhang;
-    }
-
-    @OneToMany(mappedBy = "nguoidung")
-    private List<DONHANG> donhang;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setMaNguoiDung(long maNguoiDung) {
+        this.maNguoiDung = maNguoiDung;
     }
 
     public String getEmail() {
@@ -98,14 +83,31 @@ public class NGUOIDUNG {
         return anhDaiDien;
     }
 
-    public void setAnhDaiDien(String anhdaidien) {
-        this.anhDaiDien = anhdaidien;
+    public void setAnhDaiDien(String anhDaiDien) {
+        this.anhDaiDien = anhDaiDien;
+    }
+
+    public VAITRO getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(VAITRO vaiTro) {
+        this.vaiTro = vaiTro;
+    }
+
+    public List<DONHANG> getDonHang() {
+        return donHang;
+    }
+
+    public void setDonHang(List<DONHANG> donHang) {
+        this.donHang = donHang;
     }
 
     @Override
     public String toString() {
-        return "NGUOIDUNG [id=" + id + ", email=" + email + ", matKhau=" + matKhau + ", hoTen=" + hoTen + ", diaChi="
-                + diaChi + ", sdt=" + sdt + ", anhDaiDien=" + anhDaiDien + "]";
+        return "NGUOIDUNG [maNguoiDung=" + maNguoiDung + ", email=" + email + ", matKhau=" + matKhau + ", hoTen="
+                + hoTen + ", diaChi=" + diaChi + ", sdt=" + sdt + ", anhDaiDien=" + anhDaiDien + ", vaiTro=" + vaiTro
+                + ", donHang=" + donHang + "]";
     }
 
 }

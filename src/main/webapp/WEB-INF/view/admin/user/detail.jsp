@@ -16,9 +16,9 @@
             </head>
 
             <body class="sb-nav-fixed">
-                <jsp:include page="../user/layout/header.jsp" />
+                <jsp:include page="../layout/header.jsp" />
                 <div id="layoutSidenav">
-                    <jsp:include page="../user/layout/sidebar.jsp" />
+                    <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
@@ -37,7 +37,7 @@
                                                         User information
                                                     </div>
                                                     <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item">ID: ${user.id}</li>
+                                                        <li class="list-group-item">ID: ${user.maNguoiDung}</li>
                                                         <li class="list-group-item">Email: ${user.email}</li>
                                                         <li class="list-group-item">Họ Tên: ${user.hoTen}</li>
                                                         <li class="list-group-item">Địa Chỉ: ${user.diaChi}</li>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </main>
-                        <jsp:include page="../user/layout/footer.jsp" />
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

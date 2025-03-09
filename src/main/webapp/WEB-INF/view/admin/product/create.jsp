@@ -33,47 +33,57 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Manager product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">Create user</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
+                                    <li class="breadcrumb-item active">Create product</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a user</h3>
+                                            <h3>Create a product</h3>
                                             <hr />
-                                            <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser" enctype="multipart/form-data" class="row">
+                                            <form:form method="post" action="/admin/product/create"
+                                                modelAttribute="newProduct" enctype="multipart/form-data" class="row">
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Email address</label>
-                                                    <form:input type="email" path="email" Class="form-control" />
+                                                    <label class="form-label">Name</label>
+                                                    <form:input type="text" path="ten" Class="form-control" />
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Password</label>
-                                                    <form:password path="matKhau" Class="form-control" />
-                                                </div>
-
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Phone Number</label>
-                                                    <form:input type="text" path="sdt" Class="form-control" />
-                                                </div>
-
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Full Name</label>
-                                                    <form:input type="text" path="hoTen" Class="form-control" />
+                                                    <label class="form-label">price</label>
+                                                    <form:input type="text" path="gia" Class="form-control" />
                                                 </div>
 
                                                 <div class="mb-3 col-12">
-                                                    <label class="form-label">Address</label>
-                                                    <form:input type="text" path="diaChi" Class="form-control" />
+                                                    <label class="form-label">Detail Description</label>
+                                                    <form:input type="text" path="moTaChiTiet" Class="form-control" />
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Vai Trò</label>
-                                                    <form:select class="form-select" path="vaiTro.ten">
+                                                    <label class="form-label">Short Description</label>
+                                                    <form:input type="text" path="moTaNgan" Class="form-control" />
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Quantity</label>
+                                                    <form:input type="number" path="soLuong" Class="form-control" />
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Factory</label>
+                                                    <form:select class="form-select" path="noiSanXuat">
+                                                        <form:option value="Iphone">Iphone</form:option>
+                                                        <form:option value="SamSung">SamSung</form:option>
+                                                        <form:option value="Redmi">Redmi</form:option>
+                                                        <form:option value="Oppo">Oppo</form:option>
+                                                    </form:select>
+
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Target</label>
+                                                    <form:select class="form-select" path="mucTieu">
                                                         <form:option value="ADMIN">ADMIN</form:option>
                                                         <form:option value="USER">USER</form:option>
                                                     </form:select>
@@ -81,7 +91,7 @@
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <label for="avatarFile" class="form-label">Image</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         name="hoidanitFile" accept=".png, .jpg, .jpeg" />
                                                 </div>

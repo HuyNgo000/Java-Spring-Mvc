@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<NGUOIDUNG, Long> {
 
     List<NGUOIDUNG> findByEmail(String email);
 
-    NGUOIDUNG findById(long id);
+    NGUOIDUNG findByMaNguoiDung(long maNguoiDung);
 
     void deleteById(long id);
 

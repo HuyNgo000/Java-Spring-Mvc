@@ -2,7 +2,6 @@ package vn.huyngo.phoneshop.controller.admin;
 
 import java.util.List;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +68,7 @@ public class UserController {
 
     @PostMapping("/admin/user/update")
     public String updateUser(Model model, @ModelAttribute("updateUser") NGUOIDUNG hoidanit) {
-        NGUOIDUNG currentUser = this.userService.GetUserDetail(hoidanit.getId());
+        NGUOIDUNG currentUser = this.userService.GetUserDetail(hoidanit.getMaNguoiDung());
         if (currentUser != null) {
             currentUser.setDiaChi(hoidanit.getDiaChi());
             currentUser.setHoTen(hoidanit.getHoTen());
@@ -86,7 +85,8 @@ public class UserController {
         String hashPassword = this.passwordEncoder.encode(create.getMatKhau());
         create.setAnhDaiDien(avatar);
         create.setMatKhau(hashPassword);
-        create.setVaitro(this.userService.getRoleByName(create.getVaitro().getTen()));
+        // create.setVaiTro(this.userService.getRoleByName(create.getVaiTro().getTen()));
+        create.setVaiTro(this.userService.getRoleByName(create.getVaiTro().getTen()));
         this.userService.handleSaveUser(create);
         return "redirect:/admin/user";
     }
@@ -100,7 +100,7 @@ public class UserController {
 
     @PostMapping("/admin/user/delete")
     public String deleteUser(Model model, @ModelAttribute("deleteUser") NGUOIDUNG delete) {
-        this.userService.DeleteUser(delete.getId());
+        this.userService.DeleteUser(delete.getMaNguoiDung());
         return "redirect:/admin/user";
     }
 }
