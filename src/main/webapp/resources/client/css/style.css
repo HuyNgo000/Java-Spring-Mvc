@@ -44,6 +44,12 @@
     height: 100%;
 }
 
+.avatarhehe {
+    width: 100px;
+    height: 100px;
+    border-radius: 50% !important;
+}
+
 .brand-logo {
     font-size: 32px;
     font-weight: bold;

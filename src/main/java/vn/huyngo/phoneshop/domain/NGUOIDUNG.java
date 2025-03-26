@@ -9,7 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "NGUOIDUNG")
@@ -17,8 +21,15 @@ public class NGUOIDUNG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long maNguoiDung;
+
+    @NotNull
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+    @NotNull
+    @Size(min = 2, message = "Mật khẩu phải có ít nhất 2 kí tự")
     private String matKhau;
+    @NotNull
+    @Size(min = 3, message = "Họ Tên phải có ít nhất 3 kí tự")
     private String hoTen;
     private String diaChi;
     private String sdt;
@@ -30,6 +41,12 @@ public class NGUOIDUNG {
 
     @OneToMany(mappedBy = "nguoiDung")
     private List<DONHANG> donHang;
+
+    @OneToOne(mappedBy = "nguoiDung")
+    private GIOHANG gioHang;
+
+    @OneToMany(mappedBy = "nguoiDung")
+    private List<DANHGIA> danhGia;
 
     public long getMaNguoiDung() {
         return maNguoiDung;
@@ -103,11 +120,27 @@ public class NGUOIDUNG {
         this.donHang = donHang;
     }
 
+    public GIOHANG getGioHang() {
+        return gioHang;
+    }
+
+    public void setGioHang(GIOHANG gioHang) {
+        this.gioHang = gioHang;
+    }
+
+    public List<DANHGIA> getDanhGia() {
+        return danhGia;
+    }
+
+    public void setDanhGia(List<DANHGIA> danhGia) {
+        this.danhGia = danhGia;
+    }
+
     @Override
     public String toString() {
         return "NGUOIDUNG [maNguoiDung=" + maNguoiDung + ", email=" + email + ", matKhau=" + matKhau + ", hoTen="
                 + hoTen + ", diaChi=" + diaChi + ", sdt=" + sdt + ", anhDaiDien=" + anhDaiDien + ", vaiTro=" + vaiTro
-                + ", donHang=" + donHang + "]";
+                + ", donHang=" + donHang + ", gioHang=" + gioHang + ", danhGia=" + danhGia + "]";
     }
 
 }

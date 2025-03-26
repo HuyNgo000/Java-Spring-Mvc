@@ -1,20 +1,27 @@
 package vn.huyngo.phoneshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
+import vn.huyngo.phoneshop.domain.SANPHAM;
 import vn.huyngo.phoneshop.service.UploadService;
 import vn.huyngo.phoneshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -29,19 +36,31 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        List<NGUOIDUNG> arruser = this.userService.GetAllUser();
-        System.out.println(arruser);
-        String test = this.userService.handleHello();
-        model.addAttribute("eric", test);
-        return "hello";
-    }
+    // @RequestMapping("/")
+    // public String getHomePage(Model model) {
+    // List<NGUOIDUNG> arruser = this.userService.GetAllUser();
+    // System.out.println(arruser);
+    // String test = this.userService.handleHello();
+    // model.addAttribute("eric", test);
+    // return "hello";
+    // }
 
     @RequestMapping("/admin/user")
-    public String geTabletUserPage(Model model) {
-        List<NGUOIDUNG> users = this.userService.GetAllUser();
+    public String geTabletUserPage(Model model, @RequestParam("page") Optional<String> opPage) {
+        int page = 1;
+        try {
+            if (opPage.isPresent()) {
+                page = Integer.parseInt(opPage.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 1);
+        Page<NGUOIDUNG> user = this.userService.GetAllUser(pageable);
+        List<NGUOIDUNG> users = user.getContent();
         model.addAttribute("users", users);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", user.getTotalPages());
         return "admin/user/show";
     }
 
@@ -67,25 +86,42 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String updateUser(Model model, @ModelAttribute("updateUser") NGUOIDUNG hoidanit) {
-        NGUOIDUNG currentUser = this.userService.GetUserDetail(hoidanit.getMaNguoiDung());
+    public String updateUser(Model model, @ModelAttribute("updateUser") @Valid NGUOIDUNG update,
+            BindingResult updateBindingResult, @RequestParam("hoidanitFile") MultipartFile file) {
+
+        // if (updateBindingResult.hasErrors()) {
+        // return "admin/user/update";
+        // }
+        NGUOIDUNG currentUser = this.userService.GetUserDetail(update.getMaNguoiDung());
+
+        if (!file.isEmpty()) {
+            String img = this.uploadService.handleSaveUploadFile(file, "avatar");
+            currentUser.setAnhDaiDien(img);
+        }
+
         if (currentUser != null) {
-            currentUser.setDiaChi(hoidanit.getDiaChi());
-            currentUser.setHoTen(hoidanit.getHoTen());
-            currentUser.setSdt(hoidanit.getSdt());
+            currentUser.setDiaChi(update.getDiaChi());
+            currentUser.setHoTen(update.getHoTen());
+            currentUser.setSdt(update.getSdt());
+            currentUser.setVaiTro(this.userService.getRoleByName(update.getVaiTro().getTen()));
             this.userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") NGUOIDUNG create,
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid NGUOIDUNG create,
+            BindingResult bindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
+
+        if (bindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(create.getMatKhau());
         create.setAnhDaiDien(avatar);
         create.setMatKhau(hashPassword);
-        // create.setVaiTro(this.userService.getRoleByName(create.getVaiTro().getTen()));
         create.setVaiTro(this.userService.getRoleByName(create.getVaiTro().getTen()));
         this.userService.handleSaveUser(create);
         return "redirect:/admin/user";
@@ -95,7 +131,7 @@ public class UserController {
     public String getUserDeletePage(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
         model.addAttribute("deleteUser", new NGUOIDUNG());
-        return "/admin/user/delete";
+        return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")
@@ -103,4 +139,5 @@ public class UserController {
         this.userService.DeleteUser(delete.getMaNguoiDung());
         return "redirect:/admin/user";
     }
+
 }

@@ -25,6 +25,7 @@
                                 <h1 class="mt-4">Manager user</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
                                     <li class="breadcrumb-item active">User detai</li>
                                 </ol>
                                 <div class="container mt-5">

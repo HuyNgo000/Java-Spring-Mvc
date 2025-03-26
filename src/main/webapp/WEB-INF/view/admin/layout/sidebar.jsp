@@ -25,11 +25,15 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Order
                             </a>
+                            <a class="nav-link" href="/admin/review">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Review
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Huy Ngô
+                        <div class="small">Logged in as: ${sessionScope.fullName}</div>
+
                     </div>
                 </nav>
             </div>

@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager User</title>
+                <title>Manager Product</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
@@ -47,28 +47,53 @@
                                             <form:form method="post" action="/admin/product/create"
                                                 modelAttribute="newProduct" enctype="multipart/form-data" class="row">
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorName">
+                                                        <form:errors path="ten" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Name</label>
-                                                    <form:input type="text" path="ten" Class="form-control" />
+                                                    <form:input type="text" path="ten"
+                                                        Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
+                                                    ${errorName}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorPrice">
+                                                        <form:errors path="gia" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">price</label>
-                                                    <form:input type="text" path="gia" Class="form-control" />
+                                                    <form:input type="text" path="gia"
+                                                        Class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" />
+                                                    ${errorPrice}
                                                 </div>
 
                                                 <div class="mb-3 col-12">
+                                                    <c:set var="errorDetailD">
+                                                        <form:errors path="moTaChiTiet" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Detail Description</label>
-                                                    <form:input type="text" path="moTaChiTiet" Class="form-control" />
+                                                    <form:input type="text" path="moTaChiTiet"
+                                                        Class="form-control ${not empty errorDetailD ? 'is-invalid' : ''}" />
+                                                    ${errorDetailD}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorShortD">
+                                                        <form:errors path="moTaNgan" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Short Description</label>
-                                                    <form:input type="text" path="moTaNgan" Class="form-control" />
+                                                    <form:input type="text" path="moTaNgan"
+                                                        Class="form-control ${not empty errorShortD ? 'is-invalid' : ''}" />
+                                                    ${errorShortD}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorQuantity">
+                                                        <form:errors path="soLuong" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label">Quantity</label>
-                                                    <form:input type="number" path="soLuong" Class="form-control" />
+                                                    <form:input type="number" path="soLuong"
+                                                        Class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}" />
+                                                    ${errorQuantity}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
@@ -94,6 +119,10 @@
                                                     <label for="avatarFile" class="form-label">Image</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         name="hoidanitFile" accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Đã bán</label>
+                                                    <form:input type="number" path="daBan" Class="form-control" />
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
