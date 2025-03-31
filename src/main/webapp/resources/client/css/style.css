@@ -435,6 +435,28 @@
     background: var(--bs-primary);
 }
 
+.sidebar {
+    height: 100vh;
+    background: #343a40;
+    color: white;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.sidebar a:hover {
+    background: #495057;
+}
+
+.content {
+    padding: 20px;
+}
+
 /*** Banner Section End ***/
 
 

@@ -55,6 +55,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             session.setAttribute("fullName", nguoidung.getHoTen());
             session.setAttribute("avatar", nguoidung.getAnhDaiDien());
             session.setAttribute("email", nguoidung.getEmail());
+            session.setAttribute("phone", nguoidung.getSdt());
+            session.setAttribute("address", nguoidung.getDiaChi());
             session.setAttribute("id", nguoidung.getMaNguoiDung());
             int sum = nguoidung.getGioHang() == null ? 0 : nguoidung.getGioHang().getTong();
             session.setAttribute("sum", sum);

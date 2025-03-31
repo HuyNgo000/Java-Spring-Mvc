@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,10 @@ import vn.huyngo.phoneshop.domain.DONHANG;
 import vn.huyngo.phoneshop.domain.GIOHANG;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
 import vn.huyngo.phoneshop.domain.SANPHAM;
+import vn.huyngo.phoneshop.domain.SANPHAM_;
+import vn.huyngo.phoneshop.domain.dto.ProductCriteriaDTO;
 import vn.huyngo.phoneshop.repository.*;
+import vn.huyngo.phoneshop.service.Spectification.ProductSpecs;
 
 @Service
 public class ProductService {
@@ -49,12 +53,87 @@ public class ProductService {
         return this.productRepository.save(sanpham);
     }
 
+    public List<SANPHAM> getProductsByFactory(String factory) {
+        return productRepository.findByNoiSanXuat(factory);
+    }
+
     public Page<SANPHAM> fetchProducts(Pageable page) {
         return this.productRepository.findAll(page);
     }
 
+    public Page<SANPHAM> searchProducts(Pageable page, String search) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(search), page);
+    }
+
     public List<SANPHAM> fetchPrs() {
         return this.productRepository.findAll();
+    }
+
+    public Page<SANPHAM> fetchProductsWithSpec(Pageable page, ProductCriteriaDTO productCriteriaDTO) {
+
+        if (productCriteriaDTO.getRom() == null
+                && productCriteriaDTO.getFactory() == null
+                && productCriteriaDTO.getPrice() == null
+                && productCriteriaDTO.getScreen() == null) {
+            return this.productRepository.findAll(page);
+        }
+
+        Specification<SANPHAM> combinedSpec = Specification.where(null);
+
+        if (productCriteriaDTO.getRom() != null && productCriteriaDTO.getRom().isPresent()) {
+            Specification<SANPHAM> currentSpecs = ProductSpecs.matchListRom(productCriteriaDTO.getRom().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        if (productCriteriaDTO.getScreen() != null && productCriteriaDTO.getScreen().isPresent()) {
+            Specification<SANPHAM> currentSpecs = ProductSpecs.matchListScreen(productCriteriaDTO.getScreen().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        if (productCriteriaDTO.getFactory() != null && productCriteriaDTO.getFactory().isPresent()) {
+            Specification<SANPHAM> currentSpecs = ProductSpecs.matchListFactory(productCriteriaDTO.getFactory().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+
+        if (productCriteriaDTO.getPrice() != null && productCriteriaDTO.getPrice().isPresent()) {
+            Specification<SANPHAM> currentSpecs = this.buildPriceSpecification(productCriteriaDTO.getPrice().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        return this.productRepository.findAll(combinedSpec, page);
+    }
+
+    // case 6
+    public Specification<SANPHAM> buildPriceSpecification(List<String> price) {
+        Specification<SANPHAM> combinedSpec = Specification.where(null); // disconjunction
+        for (String p : price) {
+            double min = 0;
+            double max = 0;
+
+            // Set the appropriate min and max based on the price range string
+            switch (p) {
+                case "duoi-10-trieu":
+                    min = 1;
+                    max = 10000000;
+                    break;
+                case "10-20-trieu":
+                    min = 10000000;
+                    max = 20000000;
+                    break;
+                case "20-30-trieu":
+                    min = 20000000;
+                    max = 30000000;
+                    break;
+                case "tren-30-trieu":
+                    min = 30000000;
+                    max = 200000000;
+                    break;
+            }
+
+            if (min != 0 && max != 0) {
+                Specification<SANPHAM> rangeSpec = ProductSpecs.matchMultiplePrice(min, max);
+                combinedSpec = combinedSpec.or(rangeSpec);
+            }
+        }
+
+        return combinedSpec;
     }
 
     public Optional<SANPHAM> getDetailProduct(Long id) {
@@ -65,7 +144,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void addPrToCart(String email, Long productId, HttpSession session) {
+    public void addPrToCart(String email, long productId, HttpSession session, long quantity) {
         NGUOIDUNG nguoidung = this.userService.getUserByEmail(email);
         if (nguoidung != null) {
             GIOHANG giohang = this.cartRepository.findByNguoiDung(nguoidung);
@@ -86,7 +165,7 @@ public class ProductService {
                     cd.setGioHang(giohang);
                     cd.setSanPham(sanpham);
                     cd.setGia(sanpham.getGia());
-                    cd.setSoLuong((long) 1);
+                    cd.setSoLuong(quantity);
                     this.cartDetailRepository.save(cd);
 
                     int s = giohang.getTong() + 1;
@@ -94,7 +173,8 @@ public class ProductService {
                     this.cartRepository.save(giohang);
                     session.setAttribute("sum", s);
                 } else {
-                    od.setSoLuong(od.getSoLuong() + 1);
+                    od.setSoLuong(od.getSoLuong() + quantity);
+                    this.cartDetailRepository.save(od);
                 }
 
             }
@@ -105,8 +185,8 @@ public class ProductService {
         return this.cartRepository.findByNguoiDung(nguoidung);
     }
 
-    public CHITIETGIOHANG getCartDetailById(Long id) {
-        return this.cartDetailRepository.findByMaChiTietGioHANG(id);
+    public Optional<CHITIETGIOHANG> getCartDetailById(Long id) {
+        return this.cartDetailRepository.findByMaChiTietGioHang(id);
     }
 
     public void deleteCartDetail(Long id) {
@@ -134,7 +214,7 @@ public class ProductService {
     public void updateCartBeforeCheckout(List<CHITIETGIOHANG> cartDetails) {
         for (CHITIETGIOHANG cartDetail : cartDetails) {
             Optional<CHITIETGIOHANG> opCartDetail = this.cartDetailRepository
-                    .findById(cartDetail.getMaChiTietGioHANG());
+                    .findByMaChiTietGioHang(cartDetail.getMaChiTietGioHang());
             if (opCartDetail.isPresent()) {
                 CHITIETGIOHANG currentCart = opCartDetail.get();
                 currentCart.setSoLuong(cartDetail.getSoLuong());
@@ -172,9 +252,12 @@ public class ProductService {
 
                     this.orderDetailRepository.save(orderDetail);
 
+                    SANPHAM p = cartDetail.getSanPham();
+                    p.setSoLuong(p.getSoLuong() - cartDetail.getSoLuong());
+
                 }
                 for (CHITIETGIOHANG cd : cartDetails) {
-                    this.cartDetailRepository.deleteById(cd.getMaChiTietGioHANG());
+                    this.cartDetailRepository.deleteById(cd.getMaChiTietGioHang());
                 }
 
                 this.cartRepository.deleteById(cart.getMaGioHang());

@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 public class CHITIETGIOHANG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long maChiTietGioHANG;
+    private Long maChiTietGioHang;
     private Long soLuong;
     private double gia;
 
@@ -23,12 +23,12 @@ public class CHITIETGIOHANG {
     @JoinColumn(name = "maSanPham")
     private SANPHAM sanPham;
 
-    public Long getMaChiTietGioHANG() {
-        return maChiTietGioHANG;
+    public Long getMaChiTietGioHang() {
+        return maChiTietGioHang;
     }
 
-    public void setMaChiTietGioHANG(Long maChiTietGioHANG) {
-        this.maChiTietGioHANG = maChiTietGioHANG;
+    public void setMaChiTietGioHang(Long maChiTietGioHang) {
+        this.maChiTietGioHang = maChiTietGioHang;
     }
 
     public Long getSoLuong() {
@@ -65,7 +65,7 @@ public class CHITIETGIOHANG {
 
     @Override
     public String toString() {
-        return "CHITIETGIOHANG [maChiTietGioHANG=" + maChiTietGioHANG + ", soLuong=" + soLuong + ", gia=" + gia
+        return "CHITIETGIOHANG [maChiTietGioHang=" + maChiTietGioHang + ", soLuong=" + soLuong + ", gia=" + gia
                 + ", gioHang=" + gioHang + ", sanPham=" + sanPham + "]";
     }
 

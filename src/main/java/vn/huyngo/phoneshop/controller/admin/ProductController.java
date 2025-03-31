@@ -116,7 +116,8 @@ public class ProductController {
             currentProduct.setMoTaNgan(update.getMoTaNgan());
             currentProduct.setSoLuong(update.getSoLuong());
             currentProduct.setNoiSanXuat(update.getNoiSanXuat());
-            currentProduct.setMucTieu(update.getMucTieu());
+            currentProduct.setManHinh(update.getmanHinh());
+            currentProduct.setBoNho(update.getBoNho());
             this.productService.handleSaveProduct(currentProduct);
 
         } else {

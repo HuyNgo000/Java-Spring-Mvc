@@ -8,7 +8,7 @@
 
                 <head>
                     <meta charset="utf-8">
-                    <title> Sản Phẩm - Laptopshop</title>
+                    <title> Sản Phẩm - PhoneShop</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
@@ -36,6 +36,30 @@
                     <!-- Template Stylesheet -->
                     <link href="/client/css/style.css" rel="stylesheet">
 
+                    <style>
+                        .page-link.disabled {
+                            color: var(--bs-pagination-disabled-color);
+                            pointer-events: none;
+                            background-color: var(--bs-pagination-disabled-bg);
+                        }
+                    </style>
+
+                    <script>
+                        function updateURL() {
+                            const inputValue = document.getElementById('myInput').value;
+                            const url = new URL(window.location.href);
+
+                            const searchParams = url.searchParams;
+                            searchParams.set('page', '1');
+                            searchParams.delete('search');
+
+                            // Thêm hoặc cập nhật query param 'text'
+                            searchParams.set('search', inputValue);
+
+                            window.location.href = url;
+                        }
+                    </script>
+
                 </head>
 
                 <body>
@@ -48,6 +72,29 @@
                     <!-- Spinner End -->
 
                     <jsp:include page="../layout/headerclient.jsp" />
+
+                    <!-- Modal Search Start -->
+                    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen">
+                            <div class="modal-content rounded-0">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d-flex align-items-center">
+                                    <div class="input-group w-75 mx-auto d-flex">
+                                        <input id="myInput" type="text" class="form-control p-3" placeholder="keywords"
+                                            aria-describedby="search-icon-1">
+                                        <button onclick="updateURL()" id="search-icon-1" class="input-group-text p-3"><i
+                                                class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Search End -->
 
 
                     <!-- Single Product Start -->
@@ -65,30 +112,30 @@
                                                 <div class="mb-2"><b>Hãng sản xuất</b></div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-1"
-                                                        value="APPLE">
+                                                        value="Apple">
                                                     <label class="form-check-label" for="factory-1">Apple</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-2"
-                                                        value="ASUS">
-                                                    <label class="form-check-label" for="factory-2">Asus</label>
+                                                        value="SamSung">
+                                                    <label class="form-check-label" for="factory-2">SamSung</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-3"
-                                                        value="LENOVO">
-                                                    <label class="form-check-label" for="factory-3">Lenovo</label>
+                                                        value="Redmi">
+                                                    <label class="form-check-label" for="factory-3">Redmi</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-4"
-                                                        value="DELL">
-                                                    <label class="form-check-label" for="factory-4">Dell</label>
+                                                        value="Oppo">
+                                                    <label class="form-check-label" for="factory-4">Oppo</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-5"
-                                                        value="LG">
-                                                    <label class="form-check-label" for="factory-5">LG</label>
+                                                        value="Huawei">
+                                                    <label class="form-check-label" for="factory-5">Huawei</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-6"
@@ -97,37 +144,72 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-12" id="targetFilter">
-                                                <div class="mb-2"><b>Mục đích sử dụng</b></div>
+                                            <div class="col-12" id="screenFilter">
+                                                <div class="mb-2"><b>Màn Hình</b></div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="target-1"
-                                                        value="GAMING">
-                                                    <label class="form-check-label" for="target-1">Gaming</label>
+                                                    <input class="form-check-input" type="checkbox" id="screen-1"
+                                                        value="6.">
+                                                    <label class="form-check-label" for="screen-1">6.7 inch</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="target-2"
-                                                        value="SINHVIEN-VANPHONG">
-                                                    <label class="form-check-label" for="target-2">Sinh viên - văn
-                                                        phòng</label>
+                                                    <input class="form-check-input" type="checkbox" id="screen-2"
+                                                        value="6.">
+                                                    <label class="form-check-label" for="screen-2">6.1 inch</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="target-3"
-                                                        value="THIET-KE-DO-HOA">
-                                                    <label class="form-check-label" for="target-3">Thiết kế đồ
-                                                        họa</label>
+                                                    <input class="form-check-input" type="checkbox" id="screen-3"
+                                                        value="4.">
+                                                    <label class="form-check-label" for="screen-3">4.7 inch</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="target-4"
-                                                        value="MONG-NHE">
-                                                    <label class="form-check-label" for="target-4">Mỏng nhẹ</label>
+                                                    <input class="form-check-input" type="checkbox" id="screen-4"
+                                                        value="5.">
+                                                    <label class="form-check-label" for="screen-4">5.4 inch</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="target-5"
-                                                        value="DOANH-NHAN">
-                                                    <label class="form-check-label" for="target-5">Doanh nhân</label>
+                                                    <input class="form-check-input" type="checkbox" id="screen-5"
+                                                        value="7.">
+                                                    <label class="form-check-label" for="screen-5">7.8 inch</label>
                                                 </div>
 
+
+
+                                            </div>
+                                            <div class="col-12" id="romFilter">
+                                                <div class="mb-2"><b>Bộ nhớ trong</b></div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-1"
+                                                        value="1TB">
+                                                    <label class="form-check-label" for="rom-1">1TB</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-2"
+                                                        value="512GB">
+                                                    <label class="form-check-label" for="rom-2">512GB</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-3"
+                                                        value="256GB">
+                                                    <label class="form-check-label" for="rom-3">256GB</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-4"
+                                                        value="128GB">
+                                                    <label class="form-check-label" for="rom-4">128GB</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-5"
+                                                        value="64GB">
+                                                    <label class="form-check-label" for="rom-5">64GB</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="rom-6"
+                                                        value="32GB">
+                                                    <label class="form-check-label" for="rom-6">32GB</label>
+                                                </div>
 
                                             </div>
                                             <div class="col-12" id="priceFilter">
@@ -141,22 +223,22 @@
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-3"
-                                                        value="10-15-trieu">
-                                                    <label class="form-check-label" for="price-3">Từ 10 - 15
+                                                        value="10-20-trieu">
+                                                    <label class="form-check-label" for="price-3">Từ 10 - 20
                                                         triệu</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-4"
-                                                        value="15-20-trieu">
-                                                    <label class="form-check-label" for="price-4">Từ 15 - 20
+                                                        value="20-30-trieu">
+                                                    <label class="form-check-label" for="price-4">Từ 20 - 30
                                                         triệu</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-5"
-                                                        value="tren-20-trieu">
-                                                    <label class="form-check-label" for="price-5">Trên 20 triệu</label>
+                                                        value="tren-30-trieu">
+                                                    <label class="form-check-label" for="price-5">Trên 30 triệu</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -203,7 +285,7 @@
                                                                 class="img-fluid w-100 rounded-top" alt="">
                                                         </div>
                                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop
+                                                            style="top: 10px; left: 10px;">${product.noiSanXuat}
                                                         </div>
                                                         <div
                                                             class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -243,7 +325,7 @@
                                                 <div class="pagination d-flex justify-content-center mt-5">
                                                     <li class="page-item">
                                                         <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="/products?page=${currentPage - 1}"
+                                                            href="/products?page=${currentPage - 1}${queryString}"
                                                             aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
@@ -251,14 +333,15 @@
                                                     <c:forEach begin="1" end="${totalPages}" varStatus="loop">
                                                         <li class="page-item">
                                                             <a class="${(loop.index) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                                href="/products?page=${loop.index}">
+                                                                href="/products?page=${loop.index}${queryString}">
                                                                 ${loop.index}
                                                             </a>
                                                         </li>
                                                     </c:forEach>
                                                     <li class="page-item">
                                                         <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="/products?page=${currentPage + 1}" aria-label="Next">
+                                                            href="/products?page=${currentPage + 1}${queryString}"
+                                                            aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>

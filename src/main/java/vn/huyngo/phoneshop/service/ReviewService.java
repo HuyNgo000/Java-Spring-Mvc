@@ -41,6 +41,10 @@ public class ReviewService {
         return this.reviewRepository.findAll(page);
     }
 
+    public List<DANHGIA> fetchReview() {
+        return this.reviewRepository.findAll();
+    }
+
     public void deleteReview(Long id) {
         reviewRepository.deleteById(id);
     }

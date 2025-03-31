@@ -8,7 +8,7 @@
 
                 <head>
                     <meta charset="utf-8">
-                    <title> Thanh toán - Laptopshop</title>
+                    <title> Thanh toán - PhoneShop</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
@@ -102,7 +102,7 @@
                                                         <input type="text"
                                                             class="form-control form-control-sm text-center border-0"
                                                             value="${cartDetail.soLuong}"
-                                                            data-cart-detail-id="${cartDetail.maChiTietGioHANG}"
+                                                            data-cart-detail-id="${cartDetail.maChiTietGioHang}"
                                                             data-cart-detail-price="${cartDetail.gia}"
                                                             data-cart-detail-index="${status.index}">
 
@@ -110,13 +110,13 @@
                                                 </td>
                                                 <td>
                                                     <p class="mb-0 mt-4"
-                                                        data-cart-detail-id="${cartDetail.maChiTietGioHANG}">
+                                                        data-cart-detail-id="${cartDetail.maChiTietGioHang}">
                                                         <fmt:formatNumber type="number"
                                                             value="${cartDetail.soLuong * cartDetail.gia}" />đ
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <form action="/cart/${cartDetail.maChiTietGioHANG}" method="post">
+                                                    <form action="/cart/${cartDetail.maChiTietGioHang}" method="post">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />
                                                         <button class="btn btn-md rounded-circle bg-light border mt-4">

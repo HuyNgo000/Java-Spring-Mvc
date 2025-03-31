@@ -36,9 +36,9 @@ public class SANPHAM {
     private String moTaNgan;
     @NotNull(message = "Không được để trống")
     private Long soLuong;
-    private Long daBan;
+    private String boNho;
     private String noiSanXuat;
-    private String mucTieu;
+    private String manHinh;
 
     @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
     private List<DANHGIA> danhGia;
@@ -99,12 +99,12 @@ public class SANPHAM {
         this.soLuong = soLuong;
     }
 
-    public Long getDaBan() {
-        return daBan;
+    public String getBoNho() {
+        return boNho;
     }
 
-    public void setDaBan(Long daBan) {
-        this.daBan = daBan;
+    public void setBoNho(String boNho) {
+        this.boNho = boNho;
     }
 
     public String getNoiSanXuat() {
@@ -115,12 +115,12 @@ public class SANPHAM {
         this.noiSanXuat = noiSanXuat;
     }
 
-    public String getMucTieu() {
-        return mucTieu;
+    public String getmanHinh() {
+        return manHinh;
     }
 
-    public void setMucTieu(String mucTieu) {
-        this.mucTieu = mucTieu;
+    public void setManHinh(String manHinh) {
+        this.manHinh = manHinh;
     }
 
     public List<DANHGIA> getDanhGia() {
@@ -134,8 +134,8 @@ public class SANPHAM {
     @Override
     public String toString() {
         return "SANPHAM [maSanPham=" + maSanPham + ", ten=" + ten + ", gia=" + gia + ", hinhAnh=" + hinhAnh
-                + ", moTaChiTiet=" + moTaChiTiet + ", moTaNgan=" + moTaNgan + ", soLuong=" + soLuong + ", daBan="
-                + daBan + ", noiSanXuat=" + noiSanXuat + ", mucTieu=" + mucTieu + ", danhGia=" + danhGia + "]";
+                + ", moTaChiTiet=" + moTaChiTiet + ", moTaNgan=" + moTaNgan + ", soLuong=" + soLuong + ", boNho="
+                + boNho + ", noiSanXuat=" + noiSanXuat + ", manHinh=" + manHinh + ", danhGia=" + danhGia + "]";
     }
 
 }

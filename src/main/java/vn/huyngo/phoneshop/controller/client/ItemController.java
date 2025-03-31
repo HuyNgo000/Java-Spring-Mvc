@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import vn.huyngo.phoneshop.domain.DONHANG;
 import vn.huyngo.phoneshop.domain.GIOHANG;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
 import vn.huyngo.phoneshop.domain.SANPHAM;
+import vn.huyngo.phoneshop.domain.SANPHAM_;
+import vn.huyngo.phoneshop.domain.dto.ProductCriteriaDTO;
 import vn.huyngo.phoneshop.service.OrderService;
 import vn.huyngo.phoneshop.service.ProductService;
 import vn.huyngo.phoneshop.service.ReviewService;
@@ -66,22 +69,40 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> opPage) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request) {
         int page = 1;
         try {
-            if (opPage.isPresent()) {
-                page = Integer.parseInt(opPage.get());
+            if (productCriteriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
+
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<SANPHAM> product = this.productService.fetchProducts(pageable);
+
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            String sort = productCriteriaDTO.getSort().get();
+            if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(SANPHAM_.GIA).ascending());
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 6, Sort.by(SANPHAM_.GIA).descending());
+            }
+        }
+
+        Page<SANPHAM> product = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
         List<SANPHAM> products = product.getContent();
+
+        String query = request.getQueryString();
+        if (query != null && !query.isBlank()) {
+            // remove pape
+            query = query.replace("page=" + page, "");
+        }
 
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", product.getTotalPages());
+        model.addAttribute("queryString", query);
         return "client/product/show";
     }
 
@@ -111,7 +132,7 @@ public class ItemController {
         HttpSession session = request.getSession(false);
         Long productId = id;
         String email = (String) session.getAttribute("email");
-        this.productService.addPrToCart(email, productId, session);
+        this.productService.addPrToCart(email, productId, session, 1);
         return "redirect:/";
     }
 

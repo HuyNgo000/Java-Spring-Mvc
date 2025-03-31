@@ -20,35 +20,25 @@
                                 🌟 T<span class="lightning-icon"><i class="bi bi-lightning-fill"></i></span>N I Mobile
                             </a>
                         </div>
-                        <!-- <a href="index.html" class="navbar-brand">
-                            <h1 class="text-primary display-6">Toan Ngoc I Mobile</h1>
-                        </a> -->
                         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarCollapse">
                             <span class="fa fa-bars text-primary"></span>
                         </button>
                         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                             <div class="navbar-nav mx-auto">
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
-                                <a href="shop.html" class="nav-item nav-link">Shop</a>
-                                <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
+                                <a href="/" class="nav-item nav-link active">Home</a>
+                                <a href="/products" class="nav-item nav-link">Shop</a>
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                         <a href="/cart" class="dropdown-item">Cart</a>
-                                        <a href="chackout.html" class="dropdown-item">Chackout</a>
-                                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                        <a href="404.html" class="dropdown-item">404 Page</a>
+                                        <a href="/checkout" class="dropdown-item">Chackout</a>
                                     </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="d-flex m-3 me-0">
                                 <c:if test="${not empty pageContext.request.userPrincipal}">
-                                    <button
-                                        class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-                                        data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                            class="fas fa-search text-primary"></i></button>
+
                                     <a href="/cart" class="position-relative me-4 my-auto">
                                         <i class="fa fa-shopping-bag fa-2x"></i>
                                         <span
@@ -72,7 +62,9 @@
                                                 </div>
                                             </li>
 
-                                            <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+                                            <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                    data-bs-target="#searchModal">Quản lý tài khoản</button></li>
+
 
                                             <li><a class="dropdown-item" href="/historyBuy">Lịch sử mua hàng</a></li>
                                             <li>
@@ -89,7 +81,8 @@
                                     </div>
                                 </c:if>
                                 <c:if test="${empty pageContext.request.userPrincipal}">
-                                    <a href="/login" class="position-relative me-4 my-auto">
+                                    <a href="/login" style="width: 100px; margin-bottom: 25px;"
+                                        class="a-login position-relative me-4 ">
                                         Đăng Nhập
                                     </a>
                                 </c:if>

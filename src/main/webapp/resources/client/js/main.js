@@ -222,5 +222,110 @@
     }
 
 
+    //handle filter products
+    $('#btnFilter').click(function (event) {
+        event.preventDefault();
+
+        let factoryArr = [];
+        let romArr = [];
+        let screenArr = [];
+        let priceArr = [];
+        //factory filter
+        $("#factoryFilter .form-check-input:checked").each(function () {
+            factoryArr.push($(this).val());
+        });
+
+        //rom filter
+        $("#romFilter .form-check-input:checked").each(function () {
+            romArr.push($(this).val());
+        });
+
+        //screen filter
+        $("#screenFilter .form-check-input:checked").each(function () {
+            screenArr.push($(this).val());
+        });
+
+        //price filter
+        $("#priceFilter .form-check-input:checked").each(function () {
+            priceArr.push($(this).val());
+        });
+
+        //sort order
+        let sortValue = $('input[name="radio-sort"]:checked').val();
+
+        const currentUrl = new URL(window.location.href);
+        const searchParams = currentUrl.searchParams;
+
+        // Add or update query parameters
+        searchParams.set('page', '1');
+        searchParams.set('sort', sortValue);
+
+        //reset
+        searchParams.delete('factory');
+        searchParams.delete('rom');
+        searchParams.delete('screen');
+        searchParams.delete('price');
+
+        if (factoryArr.length > 0) {
+            searchParams.set('factory', factoryArr.join(','));
+        }
+        if (romArr.length > 0) {
+            searchParams.set('rom', romArr.join(','));
+        }
+        if (screenArr.length > 0) {
+            searchParams.set('screen', screenArr.join(','));
+        }
+        if (priceArr.length > 0) {
+            searchParams.set('price', priceArr.join(','));
+        }
+
+        // Update the URL and reload the page
+        window.location.href = currentUrl.toString();
+    });
+    //handle auto checkbox after page loading
+    // Parse the URL parameters
+    const params = new URLSearchParams(window.location.search);
+
+    // Set checkboxes for 'factory'
+    if (params.has('factory')) {
+        const factories = params.get('factory').split(',');
+        factories.forEach(factory => {
+            $(`#factoryFilter .form-check-input[value="${factory}"]`).prop('checked', true);
+        });
+    }
+
+    // Set checkboxes for 'rom'
+    if (params.has('rom')) {
+        const roms = params.get('rom').split(',');
+        roms.forEach(rom => {
+            $(`#romFilter .form-check-input[value="${rom}"]`).prop('checked', true);
+        });
+    }
+
+    // Set checkboxes for 'screen'
+    if (params.has('screen')) {
+        const screens = params.get('screen').split(',');
+        screens.forEach(screen => {
+            $(`#screenFilter .form-check-input[value="${screen}"]`).prop('checked', true);
+        });
+    }
+
+    // Set checkboxes for 'price'
+    if (params.has('price')) {
+        const prices = params.get('price').split(',');
+        prices.forEach(price => {
+            $(`#priceFilter .form-check-input[value="${price}"]`).prop('checked', true);
+        });
+    }
+
+    // Set radio buttons for 'sort'
+    if (params.has('sort')) {
+        const sort = params.get('sort');
+        $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop('checked', true);
+    }
+
+
+
+
 })(jQuery);
 

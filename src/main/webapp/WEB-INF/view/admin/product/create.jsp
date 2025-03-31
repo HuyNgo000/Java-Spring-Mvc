@@ -103,15 +103,13 @@
                                                         <form:option value="SamSung">SamSung</form:option>
                                                         <form:option value="Redmi">Redmi</form:option>
                                                         <form:option value="Oppo">Oppo</form:option>
+                                                        <form:option value="Huawei">Huawei</form:option>
                                                     </form:select>
 
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Target</label>
-                                                    <form:select class="form-select" path="mucTieu">
-                                                        <form:option value="ADMIN">ADMIN</form:option>
-                                                        <form:option value="USER">USER</form:option>
-                                                    </form:select>
+                                                    <label class="form-label">Screen</label>
+                                                    <form:input type="text" path="manHinh" Class="form-control" />
 
                                                 </div>
 
@@ -121,8 +119,8 @@
                                                         name="hoidanitFile" accept=".png, .jpg, .jpeg" />
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Đã bán</label>
-                                                    <form:input type="number" path="daBan" Class="form-control" />
+                                                    <label class="form-label">Rom</label>
+                                                    <form:input type="text" path="boNho" Class="form-control" />
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
