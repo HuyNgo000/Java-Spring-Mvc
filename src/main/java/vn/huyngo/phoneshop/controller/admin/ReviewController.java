@@ -35,7 +35,7 @@ public class ReviewController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 1);
+        Pageable pageable = PageRequest.of(page - 1, 5);
         Page<DANHGIA> review = this.reviewService.getAllReview(pageable);
         List<DANHGIA> reviews = review.getContent();
 

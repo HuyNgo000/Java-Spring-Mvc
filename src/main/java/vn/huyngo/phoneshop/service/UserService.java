@@ -25,6 +25,10 @@ public class UserService {
         return "hello service";
     }
 
+    public void saveUser(NGUOIDUNG user) {
+        this.userRepository.save(user);
+    }
+
     public Page<NGUOIDUNG> GetAllUser(Pageable page) {
         return this.userRepository.findAll(page);
     }

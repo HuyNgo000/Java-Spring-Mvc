@@ -90,6 +90,40 @@
     height: 56px;
 }
 
+.btn-close {
+    margin-right: 2px !important;
+    padding: 10px !important;
+}
+
+.btn-muser {
+    width: 100% !important;
+    height: 50px;
+    background-color: #ccc !important;
+    border: 0 !important;
+    border-radius: 0;
+    text-align: justify !important;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif !important;
+    ;
+}
+
+.btn-muser:hover {
+    background: #495057 !important;
+    color: #fff !important;
+}
+
+.btn-logout {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-weight: bold !important;
+}
+
+.ul {
+    list-style: none;
+    padding: 0;
+}
+
 .btn-square,
 .btn-sm-square,
 .btn-md-square,

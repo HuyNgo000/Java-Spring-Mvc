@@ -1,15 +1,18 @@
 package vn.huyngo.phoneshop.controller.client;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,8 @@ import vn.huyngo.phoneshop.service.OrderService;
 import vn.huyngo.phoneshop.service.ProductService;
 import vn.huyngo.phoneshop.service.ReviewService;
 import vn.huyngo.phoneshop.service.UserService;
+import vn.huyngo.phoneshop.service.VNPayService;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,13 +48,15 @@ public class ItemController {
     private final ReviewService reviewService;
     private final UserService userService;
     private final OrderService orderService;
+    private final VNPayService vnPayService;
 
     public ItemController(ProductService productService, ReviewService reviewService, UserService userService,
-            OrderService orderService) {
+            OrderService orderService, VNPayService vnPayService) {
         this.productService = productService;
         this.reviewService = reviewService;
         this.userService = userService;
         this.orderService = orderService;
+        this.vnPayService = vnPayService;
     }
 
     @GetMapping("/product/{id}")
@@ -58,6 +65,20 @@ public class ItemController {
         SANPHAM product = this.productService.getDetailProduct(id).get();
         List<DANHGIA> danhGia = this.reviewService.getReviewByProduct(product);
 
+        NGUOIDUNG user = null; // Khai báo biến user trước
+
+        if (authentication != null && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken)) {
+
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            }
+
+            String email = authentication.getName();
+            user = this.userService.getUserByEmail(email);
+        }
+
         danhGia.forEach(DANHGIA::formatDate);
         boolean isAuthenticated = (authentication != null && authentication.isAuthenticated());
         model.addAttribute("product", product);
@@ -65,11 +86,15 @@ public class ItemController {
         model.addAttribute("review", new DANHGIA());
         model.addAttribute("id", id);
         model.addAttribute("isAuthenticated", isAuthenticated);
+        if (user != null) {
+            model.addAttribute("updateUser", user);
+        }
         return "client/product/detail";
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request,
+            Authentication authentication) {
         int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
@@ -90,6 +115,20 @@ public class ItemController {
             }
         }
 
+        NGUOIDUNG user = null; // Khai báo biến user trước
+
+        if (authentication != null && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken)) {
+
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            }
+
+            String email = authentication.getName();
+            user = this.userService.getUserByEmail(email);
+        }
+
         Page<SANPHAM> product = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
         List<SANPHAM> products = product.getContent();
 
@@ -103,6 +142,9 @@ public class ItemController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", product.getTotalPages());
         model.addAttribute("queryString", query);
+        if (user != null) {
+            model.addAttribute("updateUser", user);
+        }
         return "client/product/show";
     }
 
@@ -123,7 +165,21 @@ public class ItemController {
     }
 
     @GetMapping("/thanks")
-    public String getThanks(Model model) {
+    public String getThanks(Model model, Authentication authentication, HttpServletRequest request,
+            @RequestParam("vnp_ResponseCode") Optional<String> vnpayResponseCode,
+            @RequestParam("vnp_TxnRef") Optional<String> paymentRef) {
+        HttpSession session = request.getSession(false);
+        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        String email = authentication.getName();
+        NGUOIDUNG user = this.userService.getUserByEmail(email);
+        if (vnpayResponseCode.isPresent() && paymentRef.isPresent()) {
+            // thanh toán qua VNPAY, cập nhật trạng thái order
+            String paymentStatus = vnpayResponseCode.get().equals("00")
+                    ? "PAYMENT_SUCCEED"
+                    : "PAYMENT_FAILED";
+            this.productService.updatePaymentStatus(paymentRef.get(), paymentStatus);
+        }
+        model.addAttribute("updateUser", user);
         return "client/cart/thanks";
     }
 
@@ -137,7 +193,7 @@ public class ItemController {
     }
 
     @GetMapping("/cart")
-    public String getCart(Model model, HttpServletRequest request) {
+    public String getCart(Model model, HttpServletRequest request, Authentication authentication) {
         NGUOIDUNG user = new NGUOIDUNG();
         HttpSession session = request.getSession(false);
         Long id = (Long) session.getAttribute("id");
@@ -148,14 +204,18 @@ public class ItemController {
         for (CHITIETGIOHANG cartDetail : cd) {
             totalPrice += cartDetail.getGia() * cartDetail.getSoLuong();
         }
+        String email = authentication.getName();
+        NGUOIDUNG currentuser = this.userService.getUserByEmail(email);
+
         model.addAttribute("cartDetails", cd);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("cart", cart);
+        model.addAttribute("updateUser", currentuser);
         return "client/cart/show";
     }
 
     @GetMapping("/checkout")
-    public String getCheckout(Model model, HttpServletRequest request) {
+    public String getCheckout(Model model, HttpServletRequest request, Authentication authentication) {
         NGUOIDUNG user = new NGUOIDUNG();
         HttpSession session = request.getSession(false);
         Long id = (Long) session.getAttribute("id");
@@ -166,8 +226,12 @@ public class ItemController {
         for (CHITIETGIOHANG cartDetail : cd) {
             totalPrice += cartDetail.getGia() * cartDetail.getSoLuong();
         }
+        String email = authentication.getName();
+        NGUOIDUNG currentuser = this.userService.getUserByEmail(email);
+
         model.addAttribute("cartDetails", cd);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("updateUser", currentuser);
         return "client/cart/checkout";
     }
 
@@ -191,14 +255,24 @@ public class ItemController {
             HttpServletRequest request,
             @RequestParam("receiverName") String tenNguoiNhan,
             @RequestParam("receiverAddress") String diaChiNguoiNhan,
-            @RequestParam("receiverPhone") String sdtNguoiNhan) {
-
+            @RequestParam("receiverPhone") String sdtNguoiNhan,
+            @RequestParam("paymentMethod") String paymentMethod,
+            @RequestParam("totalPrice") String totalPrice) throws UnsupportedEncodingException {
         NGUOIDUNG currentUser = new NGUOIDUNG();// null
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setMaNguoiDung(id);
-        this.productService.placeOrder(currentUser, session, tenNguoiNhan, diaChiNguoiNhan, sdtNguoiNhan);
 
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+
+        this.productService.placeOrder(currentUser, session, tenNguoiNhan, diaChiNguoiNhan, sdtNguoiNhan,
+                paymentMethod, uuid);
+
+        if (!paymentMethod.equals("COD")) {
+            String ip = this.vnPayService.getIpAddress(request);
+            String vnpUrl = this.vnPayService.generateVNPayURL(Double.parseDouble(totalPrice), uuid, ip);
+            return "redirect:" + vnpUrl;
+        }
         return "redirect:/thanks";
     }
 
@@ -224,14 +298,18 @@ public class ItemController {
     }
 
     @GetMapping("/historyBuy")
-    public String getMethodName(Model model, HttpServletRequest request) {
+    public String getMethodName(Model model, HttpServletRequest request, Authentication authentication) {
         NGUOIDUNG user = new NGUOIDUNG();
         HttpSession session = request.getSession(false);
         Long id = (Long) session.getAttribute("id");
         user.setMaNguoiDung(id);
 
+        String email = authentication.getName();
+        NGUOIDUNG currentuser = this.userService.getUserByEmail(email);
+
         List<DONHANG> order = this.orderService.getOrderByUser(user);
         model.addAttribute("orders", order);
+        model.addAttribute("updateUser", currentuser);
         return "client/cart/history";
     }
 

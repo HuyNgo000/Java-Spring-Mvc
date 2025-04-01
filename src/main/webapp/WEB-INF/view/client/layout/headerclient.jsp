@@ -81,8 +81,7 @@
                                     </div>
                                 </c:if>
                                 <c:if test="${empty pageContext.request.userPrincipal}">
-                                    <a href="/login" style="width: 100px; margin-bottom: 25px;"
-                                        class="a-login position-relative me-4 ">
+                                    <a href="/login" style="width: 100px;" class="a-login position-relative me-4">
                                         Đăng Nhập
                                     </a>
                                 </c:if>

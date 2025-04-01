@@ -105,85 +105,157 @@
                     <!-- Navbar End -->
 
 
-                    <!-- Modal Search Start -->
-                    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-fullscreen">
-                            <div class="modal-content rounded-0">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="row mx-auto" style="background-color: white;width: 1000px;height: 800px;">
-                                    <div class="col-12 px-5 py-5">
-                                        <h3 class="text-center mb-4">Quản Lý Tài Khoản</h3>
-                                        <hr />
-                                        <form:form method="post" action="/client/user/update"
-                                            modelAttribute="updateUser" enctype="multipart/form-data">
-                                            <div class="mb-3" style="display: none;">
-                                                <label class="form-label">ID</label>
-                                                <form:input type="text" path="maNguoiDung" Class="form-control" />
-                                            </div>
-
-                                            <div class="col-12 mb-3">
-                                                <img class=" mx-auto mb-4"
-                                                    style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; display: none; margin-bottom: 10px;"
-                                                    alt="avatar preview" id="avatarPreview">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Email address</label>
-                                                <form:input type="email" path="email" Class="form-control"
-                                                    disabled="true" />
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <c:set var="errorPhone">
-                                                    <form:errors path="sdt" cssClass="invalid-feedback" />
-                                                </c:set>
-                                                <label class="form-label">Phone Number</label>
-                                                <form:input type="text" path="sdt"
-                                                    Class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
-                                                ${errorPhone}
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <c:set var="errorName">
-                                                    <form:errors path="hoTen" cssClass="invalid-feedback" />
-                                                </c:set>
-                                                <label class="form-label">Full Name</label>
-                                                <form:input type="text" path="hoTen"
-                                                    Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
-                                                ${errorName}
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <c:set var="errorAddress">
-                                                        <form:errors path="diaChi" cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <label class="form-label">Address</label>
-                                                    <form:input type="text" path="diaChi"
-                                                        Class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
-                                                    ${errorAddress}
-                                                </div>
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Avatar</label>
-                                                    <input class="form-control" type="file" id="avatarFile"
-                                                        name="hoidanitFile" accept=".png, .jpg, .jpeg" />
-                                                </div>
-                                            </div>
-
-                                            <button type="submit" style="float: right;"
-                                                class="btn btn-warning my-3">Update</button>
-                                        </form:form>
+                    <!-- Modal manager user Start -->
+                    <c:if test="${not empty pageContext.request.userPrincipal}">
+                        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen" style="height: 925px;">
+                                <div class="modal-content rounded-0">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-                                </div>
+                                    <div class="container" style="background-color: white;">
+                                        <div class="row g-4" style="margin-bottom: -50px;">
+                                            <div class="col-lg-2 pt-3"
+                                                style="background-color: #ccc;margin-bottom: 50px;">
+                                                <div class="row g-4">
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-3">
+                                                            <ul class="list-unstyled fruite-categorie">
+                                                                <li class="d-flex flex-column"
+                                                                    style="min-width: 300px;">
+                                                                </li>
+                                                                <div class="d-flex">
+                                                                    <div> <img
+                                                                            style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;"
+                                                                            src="/images/avatar/${sessionScope.avatar}" />
+                                                                    </div>
+                                                                    <div class="text-center text-dark my-3 mx-3"
+                                                                        style="font-size: 20px;font-weight: bold;font-family: 'Times New Roman', serif;">
+                                                                        ${sessionScope.fullName}
+                                                                    </div>
+                                                                </div>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 px-0">
+                                                        <div class="mb-3">
+                                                            <ul class="ul">
+                                                                <li><a href="/"
+                                                                        class="btn btn-primary btn-muser text-dark">Trang
+                                                                        chủ</a>
+                                                                </li>
+                                                                <li><a href="historyBuy"
+                                                                        class="btn btn-primary btn-muser text-dark">Lịch
+                                                                        sử
+                                                                        mua hàng</a>
+                                                                </li>
+                                                                <li><a href="#"
+                                                                        class="btn btn-primary btn-muser text-dark">Cài
+                                                                        đặt</a>
+                                                                </li>
+                                                                <hr>
+                                                                <li>
+                                                                    <form method="post" action="/logout">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" />
+                                                                        <button
+                                                                            class="btn-muser btn-logout text-dark">Đăng
+                                                                            xuất</button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 pt-5">
+                                                <div class="row g-4 justify-content-center">
+                                                    <div class="row mx-auto" style="width: 1000px;height: 800px;">
+                                                        <div class="col-12 px-5 mx-auto">
+                                                            <form:form method="post" action="/client/user/update"
+                                                                modelAttribute="updateUser"
+                                                                enctype="multipart/form-data">
+                                                                <div class="mb-3" style="display: none;">
+                                                                    <label class="form-label">ID</label>
+                                                                    <form:input type="text" path="maNguoiDung"
+                                                                        Class="form-control" />
+                                                                </div>
 
+                                                                <div class="col-12 mb-3">
+                                                                    <img class=" mx-auto mb-4"
+                                                                        style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; display: none; margin-bottom: 10px;"
+                                                                        alt="avatar preview" id="avatarPreview">
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Email
+                                                                        address</label>
+                                                                    <form:input type="email" path="email"
+                                                                        Class="form-control" disabled="true" />
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <c:set var="errorPhone">
+                                                                        <form:errors path="sdt"
+                                                                            cssClass="invalid-feedback" />
+                                                                    </c:set>
+                                                                    <label class="form-label">Phone
+                                                                        Number</label>
+                                                                    <form:input type="text" path="sdt"
+                                                                        Class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
+                                                                    ${errorPhone}
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <c:set var="errorName">
+                                                                        <form:errors path="hoTen"
+                                                                            cssClass="invalid-feedback" />
+                                                                    </c:set>
+                                                                    <label class="form-label">Full
+                                                                        Name</label>
+                                                                    <form:input type="text" path="hoTen"
+                                                                        Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
+                                                                    ${errorName}
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="mb-3 col-12 col-md-6">
+                                                                        <c:set var="errorAddress">
+                                                                            <form:errors path="diaChi"
+                                                                                cssClass="invalid-feedback" />
+                                                                        </c:set>
+                                                                        <label class="form-label">Address</label>
+                                                                        <form:input type="text" path="diaChi"
+                                                                            Class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
+                                                                        ${errorAddress}
+                                                                    </div>
+                                                                    <div class="mb-3 col-12 col-md-6">
+                                                                        <label for="avatarFile"
+                                                                            class="form-label">Avatar</label>
+                                                                        <input class="form-control" type="file"
+                                                                            id="avatarFile" name="hoidanitFile"
+                                                                            accept=".png, .jpg, .jpeg" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-warning my-3">Update</button>
+                                                            </form:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Modal Search End -->
+                    </c:if>
+                    <!-- Modal manager user End -->
 
 
                     <!-- Hero Start -->
@@ -584,253 +656,11 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Fruits Shop End-->
 
                     <!-- Featurs Section Start -->
                     <jsp:include page="../layout/featur.jsp" />
                     <!-- Featurs Section End -->
-
-
-                    <!-- Bestsaler Product Start -->
-                    <div class="container-fluid">
-                        <div class="container py-5">
-                            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                                <h1 class="display-4">Bestseller Products</h1>
-                                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem
-                                    Ipsum which looks reasonable.</p>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-1.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-2.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-3.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-4.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-5.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="p-4 rounded bg-light">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <img src="/client/img/best-product-6.jpg"
-                                                    class="img-fluid rounded-circle w-100" alt="">
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="h5">Organic Tomato</a>
-                                                <div class="d-flex my-3">
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star text-primary"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <h4 class="mb-3">3.12 $</h4>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="text-center">
-                                        <img src="/client/img/fruite-item-1.jpg" class="img-fluid rounded" alt="">
-                                        <div class="py-4">
-                                            <a href="#" class="h5">Organic Tomato</a>
-                                            <div class="d-flex my-3 justify-content-center">
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h4 class="mb-3">3.12 $</h4>
-                                            <a href="#"
-                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="text-center">
-                                        <img src="/client/img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
-                                        <div class="py-4">
-                                            <a href="#" class="h5">Organic Tomato</a>
-                                            <div class="d-flex my-3 justify-content-center">
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h4 class="mb-3">3.12 $</h4>
-                                            <a href="#"
-                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="text-center">
-                                        <img src="/client/img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
-                                        <div class="py-4">
-                                            <a href="#" class="h5">Organic Tomato</a>
-                                            <div class="d-flex my-3 justify-content-center">
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h4 class="mb-3">3.12 $</h4>
-                                            <a href="#"
-                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="text-center">
-                                        <img src="/client/img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
-                                        <div class="py-4">
-                                            <a href="#" class="h5">Organic Tomato</a>
-                                            <div class="d-flex my-3 justify-content-center">
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star text-primary"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h4 class="mb-3">3.12 $</h4>
-                                            <a href="#"
-                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Bestsaler Product End -->
 
 
                     <!-- Tastimonial Start -->

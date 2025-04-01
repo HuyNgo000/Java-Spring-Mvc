@@ -40,6 +40,7 @@
                                                             <th scope="col">Total price</th>
                                                             <th scope="col">User</th>
                                                             <th scope="col">Status</th>
+                                                            <th scope="col">Payment</th>
                                                             <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
@@ -53,6 +54,11 @@
                                                                 </td>
                                                                 <td>${order.nguoiDung.hoTen}</td>
                                                                 <td>${order.trangThai}</td>
+                                                                <td>
+                                                                    <div>Status: ${order.trangThaiThanhToan}</div>
+                                                                    <div>Ref: ${order.maThanhToan}</div>
+                                                                    <div>Method: ${order.hinhThucThanhToan}</div>
+                                                                </td>
                                                                 <td><a href="/admin/order/${order.maDonHang}"
                                                                         class="btn btn-success">View</a>
                                                                     <a href="/admin/order/update/${order.maDonHang}"

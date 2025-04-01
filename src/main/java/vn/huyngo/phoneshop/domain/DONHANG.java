@@ -22,12 +22,39 @@ public class DONHANG {
     private String diaChiNguoiNhan;
     private String sdtNguoiNhan;
     private String trangThai;
+    private String maThanhToan;
+    private String trangThaiThanhToan;
+    private String hinhThucThanhToan;
     @ManyToOne
     @JoinColumn(name = "maNguoiDung")
     private NGUOIDUNG nguoiDung;
 
     @OneToMany(mappedBy = "donHang")
     private List<CHITIETDONHANG> chiTietDonHang;
+
+    public String getMaThanhToan() {
+        return maThanhToan;
+    }
+
+    public void setMaThanhToan(String maThanhToan) {
+        this.maThanhToan = maThanhToan;
+    }
+
+    public String getTrangThaiThanhToan() {
+        return trangThaiThanhToan;
+    }
+
+    public void setTrangThaiThanhToan(String trangThaiThanhToan) {
+        this.trangThaiThanhToan = trangThaiThanhToan;
+    }
+
+    public String getHinhThucThanhToan() {
+        return hinhThucThanhToan;
+    }
+
+    public void setHinhThucThanhToan(String hinhThucThanhToan) {
+        this.hinhThucThanhToan = hinhThucThanhToan;
+    }
 
     public Long getMaDonHang() {
         return maDonHang;

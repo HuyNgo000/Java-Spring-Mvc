@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Bỏ qua file chứa thông tin nhạy cảm
+.env
+application-secret.properties

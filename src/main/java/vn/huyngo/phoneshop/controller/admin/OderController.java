@@ -6,12 +6,14 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import vn.huyngo.phoneshop.domain.DONHANG;
+import vn.huyngo.phoneshop.domain.DONHANG_;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
 import vn.huyngo.phoneshop.service.OrderService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +37,7 @@ public class OderController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 1);
+        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by(DONHANG_.MA_DON_HANG).descending());
         Page<DONHANG> order = this.orderService.getOrder(pageable);
         List<DONHANG> orders = order.getContent();
         model.addAttribute("orders", orders);

@@ -2,6 +2,7 @@ package vn.huyngo.phoneshop.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -224,7 +225,7 @@ public class ProductService {
     }
 
     public void placeOrder(NGUOIDUNG user, HttpSession session, String receiverName, String receiverAdress,
-            String receiverPhone) {
+            String receiverPhone, String paymentMethod, String uuid) {
         GIOHANG cart = this.cartRepository.findByNguoiDung(user);
         if (cart != null) {
             List<CHITIETGIOHANG> cartDetails = cart.getChiTietGioHang();
@@ -234,6 +235,9 @@ public class ProductService {
                 order.setDiaChiNguoiNhan(receiverAdress);
                 order.setSdtNguoiNhan(receiverPhone);
                 order.setTenNguoiNhan(receiverName);
+                order.setTrangThaiThanhToan("PAYMENT_UNPAID");
+                order.setHinhThucThanhToan(paymentMethod);
+                order.setMaThanhToan(paymentMethod.equals("COD") ? "UNKNOWN" : uuid);
 
                 double sum = 0;
                 for (CHITIETGIOHANG cd : cartDetails) {
@@ -332,6 +336,16 @@ public class ProductService {
 
             }
 
+        }
+    }
+
+    public void updatePaymentStatus(String paymentRef, String paymentStatus) {
+        Optional<DONHANG> orderOptional = this.orderRepository.findByMaThanhToan(paymentRef);
+        if (orderOptional.isPresent()) {
+            // update
+            DONHANG order = orderOptional.get();
+            order.setTrangThaiThanhToan(paymentStatus);
+            this.orderRepository.save(order);
         }
     }
 

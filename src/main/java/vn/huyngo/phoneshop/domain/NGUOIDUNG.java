@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -47,6 +48,15 @@ public class NGUOIDUNG {
 
     @OneToMany(mappedBy = "nguoiDung")
     private List<DANHGIA> danhGia;
+
+    private String nhaCungCap;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.nhaCungCap == null) {
+            this.nhaCungCap = "LOCAL";
+        }
+    }
 
     public long getMaNguoiDung() {
         return maNguoiDung;
@@ -141,6 +151,14 @@ public class NGUOIDUNG {
         return "NGUOIDUNG [maNguoiDung=" + maNguoiDung + ", email=" + email + ", matKhau=" + matKhau + ", hoTen="
                 + hoTen + ", diaChi=" + diaChi + ", sdt=" + sdt + ", anhDaiDien=" + anhDaiDien + ", vaiTro=" + vaiTro
                 + ", donHang=" + donHang + ", gioHang=" + gioHang + ", danhGia=" + danhGia + "]";
+    }
+
+    public String getNhaCungCap() {
+        return nhaCungCap;
+    }
+
+    public void setNhaCungCap(String nhaCungCap) {
+        this.nhaCungCap = nhaCungCap;
     }
 
 }

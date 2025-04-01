@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,10 +58,24 @@ public class HomePageController {
             // TODO: handle exception
         }
 
-        HttpSession session = request.getSession(false);
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-        String email = authentication.getName();
-        NGUOIDUNG user = this.userService.getUserByEmail(email);
+        // HttpSession session = request.getSession(false);
+        // session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        // String email = authentication.getName();
+        // NGUOIDUNG user = this.userService.getUserByEmail(email);
+
+        NGUOIDUNG user = null; // Khai báo biến user trước
+
+        if (authentication != null && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken)) {
+
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            }
+
+            String email = authentication.getName();
+            user = this.userService.getUserByEmail(email);
+        }
 
         String search = opSearch.isPresent() ? opSearch.get() : "";
         Pageable pageable = PageRequest.of(page - 1, 16);
@@ -87,7 +103,9 @@ public class HomePageController {
         model.addAttribute("totalPages", product.getTotalPages());
         model.addAttribute("queryString", query);
         model.addAttribute("reviews", review);
-        model.addAttribute("updateUser", user);
+        if (user != null) {
+            model.addAttribute("updateUser", user);
+        }
         return "client/homepage/show";
     }
 
