@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager User</title>
+                <title>Quản lý người dùng</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -22,18 +21,18 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Quản lý người dùng</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">Người dùng</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-12 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h2>Table user</h3>
-                                                    <a href="/admin/user/create" class="btn btn-primary">Create a
-                                                        user</a>
+                                                <h2>Bảng người dùng</h3>
+                                                    <a href="/admin/user/create" class="btn btn-primary">Tạo mới người
+                                                        dùng</a>
                                             </div>
                                             <hr />
                                             <table class="table table-bordered table-hover">
@@ -41,9 +40,9 @@
                                                     <tr>
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Full Name</th>
-                                                        <th scope="col">Role</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col">Họ tên</th>
+                                                        <th scope="col">Vai trò</th>
+                                                        <th scope="col">Hành động</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -54,11 +53,11 @@
                                                             <td>${user.hoTen}</td>
                                                             <td>${user.vaiTro.ten}</td>
                                                             <td><a href="/admin/user/${user.maNguoiDung}"
-                                                                    class="btn btn-success">View</a>
+                                                                    class="btn btn-success">Chi tiết</a>
                                                                 <a href="/admin/user/update/${user.maNguoiDung}"
-                                                                    class="btn btn-warning mx-2">Update</a>
+                                                                    class="btn btn-warning mx-2">Cập nhật</a>
                                                                 <a href="/admin/user/delete/${user.maNguoiDung}"
-                                                                    class="btn btn-danger">Delete</a>
+                                                                    class="btn btn-danger">Xóa</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

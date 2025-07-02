@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager Product</title>
+                <title>Cập Nhật Sản Phẩm</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
@@ -39,16 +38,16 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager product</h1>
+                                <h1 class="mt-4">Quản lý sản phẩm</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
-                                    <li class="breadcrumb-item active">Update product</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/product">Sản phẩm</a></li>
+                                    <li class="breadcrumb-item active">Cập nhật sản phẩm</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Update a product</h3>
+                                            <h3>Cập nhật sản phẩm</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/product/update"
                                                 modelAttribute="updateProduct" enctype="multipart/form-data"
@@ -61,7 +60,7 @@
                                                     <c:set var="errorName">
                                                         <form:errors path="ten" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Name</label>
+                                                    <label class="form-label">Tên sản phẩm</label>
                                                     <form:input type="text" path="ten"
                                                         Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
                                                     ${errorName}
@@ -71,7 +70,7 @@
                                                     <c:set var="errorPrice">
                                                         <form:errors path="gia" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">price</label>
+                                                    <label class="form-label">Giá</label>
                                                     <form:input type="text" path="gia"
                                                         Class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" />
                                                     ${errorPrice}
@@ -81,7 +80,7 @@
                                                     <c:set var="errorDetailD">
                                                         <form:errors path="moTaChiTiet" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Detail Description</label>
+                                                    <label class="form-label">Mô tả chi tiết</label>
                                                     <form:input type="text" path="moTaChiTiet"
                                                         Class="form-control ${not empty errorDetailD ? 'is-invalid' : ''}" />
                                                     ${errorDetailD}
@@ -91,7 +90,7 @@
                                                     <c:set var="errorShortD">
                                                         <form:errors path="moTaNgan" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Short Description</label>
+                                                    <label class="form-label">Mô tả ngắn</label>
                                                     <form:input type="text" path="moTaNgan"
                                                         Class="form-control ${not empty errorShortD ? 'is-invalid' : ''}" />
                                                     ${errorShortD}
@@ -101,14 +100,14 @@
                                                     <c:set var="errorQuantity">
                                                         <form:errors path="soLuong" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Quantity</label>
+                                                    <label class="form-label">Số lượng</label>
                                                     <form:input type="number" path="soLuong"
                                                         Class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}" />
                                                     ${errorQuantity}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Factory</label>
+                                                    <label class="form-label">Hãng sản xuất</label>
                                                     <form:select class="form-select" path="noiSanXuat">
                                                         <form:option value="Iphone">Iphone</form:option>
                                                         <form:option value="SamSung">SamSung</form:option>
@@ -119,14 +118,14 @@
 
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Screen</label>
+                                                    <label class="form-label">Màn hình</label>
                                                     <form:input type="text" path="manHinh" Class="form-control" />
 
                                                 </div>
 
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Image</label>
+                                                    <label for="avatarFile" class="form-label">Hình ảnh</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         name="hoidanitFile" accept=".png, .jpg, .jpeg" />
                                                 </div>
@@ -139,7 +138,7 @@
                                                         id="avatarPreview">
                                                 </div>
                                                 <div class="col-12 mb-5">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                                                 </div>
 
                                             </form:form>

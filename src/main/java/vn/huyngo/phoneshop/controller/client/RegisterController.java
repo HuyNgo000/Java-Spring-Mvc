@@ -50,4 +50,5 @@ public class RegisterController {
     public String getLoginrPage(Model model) {
         return "client/auth/login";
     }
+
 }

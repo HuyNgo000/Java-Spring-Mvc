@@ -9,9 +9,8 @@
                     <meta charset="utf-8" />
                     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                     <meta name="author" content="Hỏi Dân IT" />
-                    <title>Dashboard - Hỏi Dân IT</title>
+                    <title>Xóa Đơn Hàng</title>
                     <link href="/css/styles.css" rel="stylesheet" />
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
                         crossorigin="anonymous"></script>
@@ -24,20 +23,20 @@
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid px-4">
-                                    <h1 class="mt-4">Manage Delete</h1>
+                                    <h1 class="mt-4">Quản lý đơn hàng</h1>
                                     <ol class="breadcrumb mb-4">
                                         <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                        <li class="breadcrumb-item active"><a href="/admin/order">Order</a></li>
+                                        <li class="breadcrumb-item active"><a href="/admin/order">Đơn hàng</a></li>
 
-                                        <li class="breadcrumb-item active">Delete</li>
+                                        <li class="breadcrumb-item active">Xóa đơn hàng</li>
                                     </ol>
                                     <div class="container mt-5">
                                         <div class="row">
                                             <div class="col-md-6 col-12 mx-auto">
-                                                <h3>Delete a user id= ${id}</h3>
+                                                <h3>Xóa đơn hàng id= ${id}</h3>
                                                 <hr />
                                                 <div class="alert alert-danger" role="alert">
-                                                    Bạn có chắc chắn muốn xoá không!
+                                                    Bạn có chắc chắn muốn xoá không? Hành động này không thể hoàn tác!
                                                 </div>
 
                                                 <form:form action="/admin/order/delete" method="post"
@@ -47,7 +46,7 @@
                                                         <form:input value="${id}" type="text" class="form-control"
                                                             path="maDonHang" />
                                                     </div>
-                                                    <button class="btn btn-danger">Delete</button>
+                                                    <button class="btn btn-danger">Xóa</button>
                                                 </form:form>
                                             </div>
 

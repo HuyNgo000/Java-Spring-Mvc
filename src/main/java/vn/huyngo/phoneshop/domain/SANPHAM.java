@@ -34,6 +34,7 @@ public class SANPHAM {
     @NotNull
     @NotEmpty(message = "Không được để trống")
     private String moTaNgan;
+    @Min(value = 0, message = "Số lượng phải >= 0")
     @NotNull(message = "Không được để trống")
     private Long soLuong;
     private String boNho;

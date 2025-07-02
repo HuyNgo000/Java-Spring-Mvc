@@ -2268,9 +2268,9 @@ progress {
 .form-control:focus {
     color: #747d88;
     background-color: #fff;
-    border-color: #c0e284;
+    border-color: #4F97D7;
     outline: 0;
-    box-shadow: 0 0 0 .25rem rgba(129, 196, 8, .25)
+    box-shadow: 0 0 0 .25rem rgba(79, 151, 215, .25)
 }
 
 .form-control::-webkit-date-and-time-value {
@@ -3127,7 +3127,6 @@ textarea.form-control.is-invalid {
 .btn-check:focus+.btn,
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 .25rem rgba(129, 196, 8, .25)
 }
 
 .btn:disabled,
@@ -3498,19 +3497,19 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-    color: #81c408;
-    border-color: #81c408
+    color: #4F97D7;
+    border-color: #4F97D7
 }
 
 .btn-outline-primary:hover {
-    color: #000;
-    background-color: #81c408;
-    border-color: #81c408
+    color: #fff;
+    background-color: #4F97D7;
+    border-color: #4F97D7
 }
 
 .btn-check:focus+.btn-outline-primary,
 .btn-outline-primary:focus {
-    box-shadow: 0 0 0 .25rem rgba(129, 196, 8, .5)
+    box-shadow: 0 0 0 .25rem rgba(79, 151, 215, .5)
 }
 
 .btn-check:checked+.btn-outline-primary,
@@ -3519,8 +3518,8 @@ fieldset:disabled .btn {
 .btn-outline-primary.active,
 .btn-outline-primary.dropdown-toggle.show {
     color: #000;
-    background-color: #81c408;
-    border-color: #81c408
+    background-color: #4F97D7;
+    border-color: #4F97D7
 }
 
 .btn-check:checked+.btn-outline-primary:focus,
@@ -3528,12 +3527,12 @@ fieldset:disabled .btn {
 .btn-outline-primary:active:focus,
 .btn-outline-primary.active:focus,
 .btn-outline-primary.dropdown-toggle.show:focus {
-    box-shadow: 0 0 0 .25rem rgba(129, 196, 8, .5)
+    box-shadow: 0 0 0 .25rem rgba(79, 151, 215, .5)
 }
 
 .btn-outline-primary:disabled,
 .btn-outline-primary.disabled {
-    color: #81c408;
+    color: #4F97D7;
     background-color: rgba(0, 0, 0, 0)
 }
 
@@ -4195,7 +4194,7 @@ fieldset:disabled .btn {
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #81c408
+    background-color: #4F97D7
 }
 
 .dropdown-item.disabled,
@@ -4243,7 +4242,7 @@ fieldset:disabled .btn {
 .dropdown-menu-dark .dropdown-item.active,
 .dropdown-menu-dark .dropdown-item:active {
     color: #fff;
-    background-color: #81c408
+    background-color: #4F97D7
 }
 
 .dropdown-menu-dark .dropdown-item.disabled,
@@ -4385,7 +4384,7 @@ fieldset:disabled .btn {
 .nav-link {
     display: block;
     padding: .5rem 1rem;
-    color: #81c408;
+    color: #4F97D7;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out
 }
 
@@ -4397,7 +4396,7 @@ fieldset:disabled .btn {
 
 .nav-link:hover,
 .nav-link:focus {
-    color: #679d06
+    color: #0067c2
 }
 
 .nav-link.disabled {

@@ -9,9 +9,8 @@
                     <meta charset="utf-8" />
                     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                     <meta name="author" content="Hỏi Dân IT" />
-                    <title>Dashboard - Hỏi Dân IT</title>
+                    <title>Quản Lý Đơn Hàng</title>
                     <link href="/css/styles.css" rel="stylesheet" />
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
                         crossorigin="anonymous"></script>
@@ -24,10 +23,10 @@
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid px-4">
-                                    <h1 class="mt-4">Manager Order</h1>
+                                    <h1 class="mt-4">Quản lý đơn hàng</h1>
                                     <ol class="breadcrumb mb-4">
                                         <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Order</li>
+                                        <li class="breadcrumb-item active">Đơn hàng</li>
                                     </ol>
                                     <div>
                                         <div class="row">
@@ -37,11 +36,11 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">ID</th>
-                                                            <th scope="col">Total price</th>
-                                                            <th scope="col">User</th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col">Payment</th>
-                                                            <th scope="col">Action</th>
+                                                            <th scope="col">Tổng giá</th>
+                                                            <th scope="col">Người dùng</th>
+                                                            <th scope="col">Trạng thái</th>
+                                                            <th scope="col">Thanh toán</th>
+                                                            <th scope="col">Hành động</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -49,22 +48,23 @@
                                                             <tr>
                                                                 <td>${order.maDonHang}</td>
                                                                 <td>
-                                                                    <fmt:formatNumber type="number"
-                                                                        value="${order.tongGia}" />đ
+                                                                    <fmt:formatNumber
+                                                                        value="${totalPricePerOrder[order.maDonHang]}" />
+                                                                    đ
                                                                 </td>
                                                                 <td>${order.nguoiDung.hoTen}</td>
                                                                 <td>${order.trangThai}</td>
                                                                 <td>
-                                                                    <div>Status: ${order.trangThaiThanhToan}</div>
+                                                                    <div>Trạng thái: ${order.trangThaiThanhToan}</div>
                                                                     <div>Ref: ${order.maThanhToan}</div>
-                                                                    <div>Method: ${order.hinhThucThanhToan}</div>
+                                                                    <div>Phương thức: ${order.hinhThucThanhToan}</div>
                                                                 </td>
                                                                 <td><a href="/admin/order/${order.maDonHang}"
-                                                                        class="btn btn-success">View</a>
+                                                                        class="btn btn-success">Chi tiết</a>
                                                                     <a href="/admin/order/update/${order.maDonHang}"
-                                                                        class="btn btn-warning mx-2">Update</a>
+                                                                        class="btn btn-warning mx-2">Cập nhật</a>
                                                                     <a href="/admin/order/delete/${order.maDonHang}"
-                                                                        class="btn btn-danger">Delete</a>
+                                                                        class="btn btn-danger">Xóa</a>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>

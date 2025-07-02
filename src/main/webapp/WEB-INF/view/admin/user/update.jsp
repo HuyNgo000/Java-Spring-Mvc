@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Update User</title>
+                <title>Cập nhật người dùng</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
@@ -39,16 +38,16 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Quản lý người dùng</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">Update user</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">Người dùng</a></li>
+                                    <li class="breadcrumb-item active">Cập nhật người dùng</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Update user</h3>
+                                            <h3>Cập nhật người dùng</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/update"
                                                 modelAttribute="updateUser" enctype="multipart/form-data">
@@ -58,7 +57,7 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label">Email address</label>
+                                                    <label class="form-label">Email</label>
                                                     <form:input type="email" path="email" Class="form-control"
                                                         disabled="true" />
                                                 </div>
@@ -67,7 +66,7 @@
                                                     <c:set var="errorPhone">
                                                         <form:errors path="sdt" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Phone Number</label>
+                                                    <label class="form-label">Số điện thoại</label>
                                                     <form:input type="text" path="sdt"
                                                         Class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
                                                     ${errorPhone}
@@ -77,7 +76,7 @@
                                                     <c:set var="errorName">
                                                         <form:errors path="hoTen" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Full Name</label>
+                                                    <label class="form-label">Họ tên</label>
                                                     <form:input type="text" path="hoTen"
                                                         Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
                                                     ${errorName}
@@ -87,7 +86,7 @@
                                                     <c:set var="errorAddress">
                                                         <form:errors path="diaChi" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Address</label>
+                                                    <label class="form-label">Địa chỉ</label>
                                                     <form:input type="text" path="diaChi"
                                                         Class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
                                                     ${errorAddress}
@@ -95,7 +94,7 @@
 
                                                 <div class="row">
                                                     <div class="mb-3 col-12 col-md-6">
-                                                        <label for="avatarFile" class="form-label">Avatar</label>
+                                                        <label for="avatarFile" class="form-label">Ảnh đại diện</label>
                                                         <input class="form-control" type="file" id="avatarFile"
                                                             name="hoidanitFile" accept=".png, .jpg, .jpeg" />
                                                     </div>
@@ -114,7 +113,7 @@
                                                         id="avatarPreview">
                                                 </div>
 
-                                                <button type="submit" class="btn btn-warning mb-3">Update</button>
+                                                <button type="submit" class="btn btn-warning mb-3">Cập nhật</button>
                                             </form:form>
                                         </div>
                                     </div>

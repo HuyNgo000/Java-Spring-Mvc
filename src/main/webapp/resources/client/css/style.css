@@ -98,17 +98,18 @@
 .btn-muser {
     width: 100% !important;
     height: 50px;
-    background-color: #ccc !important;
+    color: #fff !important;
     border: 0 !important;
     border-radius: 0;
     text-align: justify !important;
     font-size: 20px;
+    background-color: #4F97D7 !important;
     font-family: 'Times New Roman', Times, serif !important;
     ;
 }
 
 .btn-muser:hover {
-    background: #495057 !important;
+    background-color: #7db2e0 !important;
     color: #fff !important;
 }
 
@@ -117,6 +118,11 @@
     justify-content: center !important;
     align-items: center !important;
     font-weight: bold !important;
+}
+
+.manager_hover:hover {
+    background-color: #7db2e0 !important;
+    color: #fff !important;
 }
 
 .ul {
@@ -228,10 +234,10 @@
     }
 }
 
-.dropdown .dropdown-menu a:hover {
+/* .dropdown .dropdown-menu a:hover {
     background: var(--bs-secondary);
     color: var(--bs-primary);
-}
+} */
 
 .navbar .nav-item:hover .dropdown-menu {
     transform: rotateX(0deg);

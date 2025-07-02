@@ -12,7 +12,7 @@ public class CHITIETGIOHANG {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maChiTietGioHang;
-    private Long soLuong;
+    private long soLuong;
     private double gia;
 
     @ManyToOne
@@ -31,11 +31,11 @@ public class CHITIETGIOHANG {
         this.maChiTietGioHang = maChiTietGioHang;
     }
 
-    public Long getSoLuong() {
+    public long getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Long soLuong) {
+    public void setSoLuong(long soLuong) {
         this.soLuong = soLuong;
     }
 

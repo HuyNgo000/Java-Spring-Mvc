@@ -25,14 +25,17 @@
                             <span class="fa fa-bars text-primary"></span>
                         </button>
                         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                            <div class="navbar-nav mx-auto">
-                                <a href="/" class="nav-item nav-link active">Home</a>
-                                <a href="/products" class="nav-item nav-link">Shop</a>
+                            <div class="navbar-nav mx-auto" style="gap: 10px; font-size: 16px;">
+                                <a href="/" class="nav-item nav-link active"
+                                    style="padding: 8px 7px; white-space: nowrap;">Trang chủ</a>
+                                <a href="/products" class="nav-item nav-link"
+                                    style="padding: 8px 7px; white-space: nowrap;">Sản phẩm</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                        style="padding: 8px 7px; white-space: nowrap;">Trang khác</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                        <a href="/cart" class="dropdown-item">Cart</a>
-                                        <a href="/checkout" class="dropdown-item">Chackout</a>
+                                        <a href="/cart" class="dropdown-item">Giỏ hàng</a>
+                                        <a href="/checkout" class="dropdown-item">Thanh toán</a>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +46,8 @@
                                         <i class="fa fa-shopping-bag fa-2x"></i>
                                         <span
                                             class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;">${sessionScope.sum}</span>
+                                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;"
+                                            id="sumCart">${sessionScope.sum}</span>
                                     </a>
                                     <div class="dropdown my-auto">
                                         <a href="#" class="dropdown" role="button" id="dropdownMenuLink"
@@ -81,8 +85,10 @@
                                     </div>
                                 </c:if>
                                 <c:if test="${empty pageContext.request.userPrincipal}">
-                                    <a href="/login" style="width: 100px;" class="a-login position-relative me-4">
-                                        Đăng Nhập
+                                    <a href="/login"
+                                        style="width: 100px; padding: 5px; border: solid;text-align: center;"
+                                        class="a-login position-relative me-4">
+                                        Đăng nhập
                                     </a>
                                 </c:if>
                             </div>

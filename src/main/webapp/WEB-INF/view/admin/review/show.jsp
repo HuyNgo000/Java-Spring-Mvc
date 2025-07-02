@@ -8,9 +8,9 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
+
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager Review</title>
+                <title>Quản lý Đánh Giá</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -22,26 +22,26 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager review</h1>
+                                <h1 class="mt-4">Quản lý đánh giá</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Review</li>
+                                    <li class="breadcrumb-item active">Đánh giá</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-12 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h2>Table review</h3>
+                                                <h2>Bảng đánh giá</h3>
                                             </div>
                                             <hr />
                                             <table class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">User name</th>
-                                                        <th scope="col">Product name</th>
-                                                        <th scope="col">Comment</th>
-                                                        <th scope="col">Rating</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col">Tên người dùng</th>
+                                                        <th scope="col">Tên sản phẩm</th>
+                                                        <th scope="col">Đánh giá</th>
+                                                        <th scope="col">Số sao</th>
+                                                        <th scope="col">Hành động</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -54,7 +54,7 @@
                                                             <td>
                                                                 <form:form method="post"
                                                                     action="/admin/review/delete/${review.maDanhGia}">
-                                                                    <button class="btn btn-danger">Delete</button>
+                                                                    <button class="btn btn-danger">Xóa</button>
                                                                 </form:form>
                                                             </td>
                                                         </tr>

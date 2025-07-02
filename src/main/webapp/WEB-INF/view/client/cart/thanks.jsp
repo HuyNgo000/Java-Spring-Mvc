@@ -46,23 +46,29 @@
                     </div>
                     <!-- Spinner End -->
 
-                    <div class="container" style="margin-top: 100px">
-                        <div class="row">
-                            <div class="col-12 mt-5">
-
-                                <div class="alert alert-success" role="alert">
-                                    Cảm ơn bạn đã đặt hàng, đơn hàng của bạn đã được xác nhận.
+                    <div class="container" style="margin-top: 120px; min-height: 60vh;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="card shadow-lg border-0 rounded-4">
+                                    <div class="card-body text-center py-5">
+                                        <div class="mb-4">
+                                            <i class="fas fa-check-circle fa-4x text-primary"></i>
+                                        </div>
+                                        <h2 class="mb-3 text-primary fw-bold">Đặt Hàng Thành Công!</h2>
+                                        <p class="mb-4 fs-5 text-primary">
+                                            Cảm ơn bạn đã đặt hàng.<br>
+                                            Đơn hàng của bạn đã được xác nhận và sẽ được xử lý trong thời gian sớm nhất.
+                                        </p>
+                                        <a href="/" class="btn btn-outline-primary px-4 py-2 rounded-pill">
+                                            <i class="fas fa-arrow-left me-2"></i>Quay lại trang chủ
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <jsp:include page="../layout/featur.jsp" />
-                    <div class="mt-4" style="margin-top: -4.5rem !important; margin-left: 120px">
-                        <i class="fas fa-arrow-left"></i>
-                        <a href="/">Quay lại trang chủ</a>
-                    </div>
 
 
                     <!-- JavaScript Libraries -->

@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Product Detail</title>
+                <title>Chi Tiết Sản Phẩm</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -22,29 +21,29 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager product</h1>
+                                <h1 class="mt-4">Quản lý sản phẩm</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
-                                    <li class="breadcrumb-item active">Product detai</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/product">Sản phẩm</a></li>
+                                    <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <h2>Product detail</h3>
+                                            <h2>Chi tiết sản phẩm</h3>
                                                 <hr />
                                                 <div class="card" style="width:60%">
                                                     <img class="card-img-top" src="/images/product/${product.hinhAnh}"
                                                         alt="Card image cap">
                                                     <div class="card-header">
-                                                        Product information
+                                                        Thông tin sản phẩm
                                                     </div>
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">ID: ${product.maSanPham}</li>
-                                                        <li class="list-group-item">Name: ${product.ten}</li>
-                                                        <li class="list-group-item">Price: ${product.gia}</li>
+                                                        <li class="list-group-item">Tên sản phẩm: ${product.ten}</li>
+                                                        <li class="list-group-item">Giá: ${product.gia}</li>
                                                     </ul>
-                                                    <a href="/admin/product" class="btn btn-primary">Back</a>
+                                                    <a href="/admin/product" class="btn btn-primary">Quay lại</a>
                                                 </div>
                                         </div>
                                     </div>

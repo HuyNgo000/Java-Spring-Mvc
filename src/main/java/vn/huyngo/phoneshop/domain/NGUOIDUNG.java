@@ -2,6 +2,7 @@ package vn.huyngo.phoneshop.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,7 +41,7 @@ public class NGUOIDUNG {
     @JoinColumn(name = "maVaiTro")
     private VAITRO vaiTro;
 
-    @OneToMany(mappedBy = "nguoiDung")
+    @OneToMany(mappedBy = "nguoiDung", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DONHANG> donHang;
 
     @OneToOne(mappedBy = "nguoiDung")

@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Manager User</title>
+                <title>Thêm Người Dùng</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
@@ -33,16 +32,16 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Quản lý người dùng</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">Create user</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">Người dùng</a></li>
+                                    <li class="breadcrumb-item active">Thêm người dùng</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a user</h3>
+                                            <h3>Thêm người dùng</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/create"
                                                 modelAttribute="newUser" enctype="multipart/form-data" class="row">
@@ -50,7 +49,7 @@
                                                     <c:set var="errorEmail">
                                                         <form:errors path="email" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Email address</label>
+                                                    <label class="form-label">Email</label>
                                                     <form:input type="email" path="email"
                                                         Class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" />
                                                     ${errorEmail}
@@ -60,7 +59,7 @@
                                                     <c:set var="errorPassword">
                                                         <form:errors path="matKhau" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Password</label>
+                                                    <label class="form-label">Mật khẩu</label>
                                                     <form:password path="matKhau"
                                                         Class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" />
                                                     ${errorPassword}
@@ -70,7 +69,7 @@
                                                     <c:set var="errorPhone">
                                                         <form:errors path="sdt" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Phone Number</label>
+                                                    <label class="form-label">Số điện thoại</label>
                                                     <form:input type="text" path="sdt"
                                                         Class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
                                                     ${errorPhone}
@@ -80,7 +79,7 @@
                                                     <c:set var="errorName">
                                                         <form:errors path="hoTen" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Full Name</label>
+                                                    <label class="form-label">Họ và tên</label>
                                                     <form:input type="text" path="hoTen"
                                                         Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
                                                     ${errorName}
@@ -90,14 +89,14 @@
                                                     <c:set var="errorAddress">
                                                         <form:errors path="diaChi" cssClass="invalid-feedback" />
                                                     </c:set>
-                                                    <label class="form-label">Address</label>
+                                                    <label class="form-label">Địa chỉ</label>
                                                     <form:input type="text" path="diaChi"
                                                         Class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
                                                     ${errorAddress}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <label for="avatarFile" class="form-label">Ảnh đại diện</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         name="hoidanitFile" accept=".png, .jpg, .jpeg" />
                                                 </div>
@@ -115,7 +114,7 @@
                                                         id="avatarPreview">
                                                 </div>
                                                 <div class="col-12 mb-5">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
                                                 </div>
 
                                             </form:form>

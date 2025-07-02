@@ -1,5 +1,6 @@
 package vn.huyngo.phoneshop.controller.client;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import jakarta.validation.Valid;
 import vn.huyngo.phoneshop.domain.DANHGIA;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
 import vn.huyngo.phoneshop.domain.SANPHAM;
+import vn.huyngo.phoneshop.domain.dto.ChangePasswordDTO;
 import vn.huyngo.phoneshop.service.ProductService;
 import vn.huyngo.phoneshop.service.ReviewService;
 import vn.huyngo.phoneshop.service.UploadService;
@@ -36,13 +39,15 @@ public class HomePageController {
     private final ReviewService reviewService;
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
     public HomePageController(ProductService productService, ReviewService reviewService, UserService userService,
-            UploadService uploadService) {
+            UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.productService = productService;
         this.reviewService = reviewService;
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -103,6 +108,7 @@ public class HomePageController {
         model.addAttribute("totalPages", product.getTotalPages());
         model.addAttribute("queryString", query);
         model.addAttribute("reviews", review);
+        model.addAttribute("thayDoiMatKhau", new ChangePasswordDTO());
         if (user != null) {
             model.addAttribute("updateUser", user);
         }
@@ -144,6 +150,44 @@ public class HomePageController {
             session.setAttribute("avatar", currentUser.getAnhDaiDien());
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/change-password")
+    public String xuLyDoiMatKhau(@Valid @ModelAttribute("thayDoiMatKhau") ChangePasswordDTO form,
+            BindingResult result,
+            Model model,
+            Principal principal) {
+
+        NGUOIDUNG nguoiDung = userService.getUserByEmail(principal.getName());
+        if (nguoiDung == null) {
+            model.addAttribute("errorMessage", "Người dùng không tồn tại");
+            model.addAttribute("updateUser", nguoiDung);
+            model.addAttribute("openChangePasswordModal", true);
+            return "client/homepage/show";
+        }
+
+        if (!passwordEncoder.matches(form.getMatKhauHienTai(), nguoiDung.getMatKhau())) {
+            model.addAttribute("errorMessage", "Mật khẩu hiện tại không đúng");
+            model.addAttribute("updateUser", nguoiDung);
+            model.addAttribute("openChangePasswordModal", true);
+            return "client/homepage/show";
+        }
+
+        if (!form.getMatKhauMoi().equals(form.getXacNhanMatKhauMoi())) {
+            model.addAttribute("errorMessage", "Xác nhận mật khẩu mới không khớp");
+            model.addAttribute("updateUser", nguoiDung);
+            model.addAttribute("openChangePasswordModal", true);
+            return "client/homepage/show";
+        }
+
+        nguoiDung.setMatKhau(passwordEncoder.encode(form.getMatKhauMoi()));
+        userService.handleSaveUser(nguoiDung);
+
+        model.addAttribute("successMessage", "Đổi mật khẩu thành công");
+        model.addAttribute("thayDoiMatKhau", new ChangePasswordDTO());
+        model.addAttribute("updateUser", nguoiDung);
+        model.addAttribute("openChangePasswordModal", true); // <<-- Quan trọng
+        return "client/homepage/show";
     }
 
 }

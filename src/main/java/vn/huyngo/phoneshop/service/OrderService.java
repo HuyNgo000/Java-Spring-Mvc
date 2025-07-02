@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import vn.huyngo.phoneshop.domain.CHITIETDONHANG;
 import vn.huyngo.phoneshop.domain.DONHANG;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
+import vn.huyngo.phoneshop.domain.SANPHAM;
 import vn.huyngo.phoneshop.repository.OrderDetailRepository;
 import vn.huyngo.phoneshop.repository.OrderRepository;
 
@@ -51,10 +52,20 @@ public class OrderService {
             List<CHITIETDONHANG> orderDetails = order.getChiTietDonHang();
             for (CHITIETDONHANG orderDetail : orderDetails) {
                 this.orderDetailRepository.deleteById(orderDetail.getMaChiTietDonHang());
+                SANPHAM product = orderDetail.getSanPham();
+                product.setSoLuong(product.getSoLuong() + orderDetail.getSoluong());
             }
         }
 
         this.orderRepository.deleteById(id);
     }
 
+    public boolean hasPurchased(Long userId, Long productId) {
+        NGUOIDUNG nguoiDung = new NGUOIDUNG();
+        nguoiDung.setMaNguoiDung(userId); // Tạo đối tượng NGUOIDUNG với ID người dùng
+
+        // Kiểm tra trong repository
+        return orderRepository.existsByNguoiDungAndChiTietDonHang_SanPham_maSanPhamAndTrangThai(nguoiDung, productId,
+                "Pending");
+    }
 }

@@ -8,9 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>User Detail</title>
+                <title>Chi tiết người dùng</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -22,20 +21,20 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manager user</h1>
+                                <h1 class="mt-4">Quản lý người dùng</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">User detai</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">Người dùng</a></li>
+                                    <li class="breadcrumb-item active">Chi tiết người dùng</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <h2>User detail</h3>
+                                            <h2>Chi tiết người dùng</h3>
                                                 <hr />
                                                 <div class="card" style="width:60%">
                                                     <div class="card-header">
-                                                        User information
+                                                        Thông tin người dùng
                                                     </div>
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">ID: ${user.maNguoiDung}</li>
@@ -43,7 +42,7 @@
                                                         <li class="list-group-item">Họ Tên: ${user.hoTen}</li>
                                                         <li class="list-group-item">Địa Chỉ: ${user.diaChi}</li>
                                                     </ul>
-                                                    <a href="/admin/user" class="btn btn-primary">Back</a>
+                                                    <a href="/admin/user" class="btn btn-primary">Quay lại</a>
                                                 </div>
                                         </div>
                                     </div>

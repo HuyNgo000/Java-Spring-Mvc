@@ -33,6 +33,14 @@
                     <!-- Customized Bootstrap Stylesheet -->
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
 
+                    <meta name="_csrf" content="${_csrf.token}" />
+
+                    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
+                    <!-- CSS -->
+                    <link rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+
                     <!-- Template Stylesheet -->
                     <link href="/client/css/style.css" rel="stylesheet">
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -113,148 +121,202 @@
                     <c:if test="${not empty pageContext.request.userPrincipal}">
                         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-fullscreen" style="height: 925px;">
-                                <div class="modal-content rounded-0">
-                                    <div class="modal-header">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content bg-white rounded-4 shadow-lg border-0">
+                                    <div class="modal-header border-0 pb-0">
+                                        <h5 class="modal-title fw-bold text-primary" id="exampleModalLabel">QUẢN LÝ TÀI
+                                            KHOẢN</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                            aria-label="Đóng"></button>
                                     </div>
-                                    <div class="container" style="background-color: white;">
-                                        <div class="row g-4" style="margin-bottom: -50px;">
-                                            <div class="col-lg-2 pt-3"
-                                                style="background-color: #ccc;margin-bottom: 50px;">
-                                                <div class="row g-4">
-                                                    <div class="col-lg-12">
-                                                        <div class="mb-3">
-                                                            <ul class="list-unstyled fruite-categorie">
-                                                                <li class="d-flex flex-column"
-                                                                    style="min-width: 300px;">
-                                                                </li>
-                                                                <div class="d-flex">
-                                                                    <div> <img
-                                                                            style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;"
-                                                                            src="/images/avatar/${sessionScope.avatar}" />
-                                                                    </div>
-                                                                    <div class="text-center text-dark my-3 mx-3"
-                                                                        style="font-size: 20px;font-weight: bold;font-family: 'Times New Roman', serif;">
-                                                                        ${sessionScope.fullName}
-                                                                    </div>
-                                                                </div>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 px-0">
-                                                        <div class="mb-3">
-                                                            <ul class="ul">
-                                                                <li><a href="/"
-                                                                        class="btn btn-primary btn-muser text-dark">Trang
-                                                                        chủ</a>
-                                                                </li>
-                                                                <li><a href="historyBuy"
-                                                                        class="btn btn-primary btn-muser text-dark">Lịch
-                                                                        sử
-                                                                        mua hàng</a>
-                                                                </li>
-                                                                <li><a href="#"
-                                                                        class="btn btn-primary btn-muser text-dark">Cài
-                                                                        đặt</a>
-                                                                </li>
-                                                                <hr>
-                                                                <li>
-                                                                    <form method="post" action="/logout">
-                                                                        <input type="hidden"
-                                                                            name="${_csrf.parameterName}"
-                                                                            value="${_csrf.token}" />
-                                                                        <button
-                                                                            class="btn-muser btn-logout text-dark">Đăng
-                                                                            xuất</button>
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                    <div class="modal-body p-4">
+                                        <div class="row">
+                                            <!-- Sidebar -->
+                                            <div class="col-md-4 border-end">
+                                                <div class="text-center mb-4">
+                                                    <img src="/images/avatar/${sessionScope.avatar}"
+                                                        class="rounded-circle shadow"
+                                                        style="width: 150px; height: 150px; object-fit: cover;"
+                                                        alt="Avatar">
+                                                    <h5 class="mt-3 mb-1 fw-bold text-dark">${sessionScope.fullName}
+                                                    </h5>
+                                                    <span
+                                                        class="badge bg-primary">${pageContext.request.userPrincipal.name}</span>
                                                 </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border-0 px-0 pb-2">
+                                                        <a href="/" class="btn btn-outline-primary w-100 mb-2"><i
+                                                                class="fas fa-home me-2"></i>Trang chủ</a>
+                                                    </li>
+                                                    <li class="list-group-item border-0 px-0 pb-2">
+                                                        <a href="/historyBuy"
+                                                            class="btn btn-outline-primary w-100 mb-2"><i
+                                                                class="fas fa-history me-2"></i>Lịch sử mua hàng</a>
+                                                    </li>
+                                                    <!-- <li class="list-group-item border-0 px-0 pb-2">
+                                                        <a href="#"
+                                                            class="btn border border-primary text-primary w-100 mb-2"><i
+                                                                class="fas fa-cog me-2"></i>Cài đặt</a>
+                                                    </li> -->
+                                                    <li class="list-group-item border-0 px-0 pb-2">
+                                                        <!-- Đổi nút Cài đặt thành Thay đổi mật khẩu -->
+                                                        <a href="#" class="btn btn-outline-primary w-100 mb-2"
+                                                            id="changePasswordTabBtn"><i
+                                                                class="fas fa-key me-2"></i>Thay đổi mật khẩu</a>
+                                                    </li>
+                                                    <li class="list-group-item border-0 px-0">
+                                                        <form method="post" action="/logout" class="d-grid">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                value="${_csrf.token}" />
+                                                            <button class="btn btn-outline-danger w-100"><i
+                                                                    class="fas fa-sign-out-alt me-2"></i>Đăng
+                                                                xuất</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="col-lg-10 pt-5">
-                                                <div class="row g-4 justify-content-center">
-                                                    <div class="row mx-auto" style="width: 1000px;height: 800px;">
-                                                        <div class="col-12 px-5 mx-auto">
-                                                            <form:form method="post" action="/client/user/update"
-                                                                modelAttribute="updateUser"
-                                                                enctype="multipart/form-data">
-                                                                <div class="mb-3" style="display: none;">
-                                                                    <label class="form-label">ID</label>
-                                                                    <form:input type="text" path="maNguoiDung"
-                                                                        Class="form-control" />
-                                                                </div>
-
-                                                                <div class="col-12 mb-3">
-                                                                    <img class=" mx-auto mb-4"
-                                                                        style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; display: none; margin-bottom: 10px;"
+                                            <!-- Main content -->
+                                            <div class="col-md-8">
+                                                <!-- Tabs -->
+                                                <ul class="nav nav-tabs mb-3" id="userTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="info-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#info-tab-pane"
+                                                            type="button" role="tab" aria-controls="info-tab-pane"
+                                                            aria-selected="true">
+                                                            Cập nhật thông tin cá nhân
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="password-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#password-tab-pane" type="button" role="tab"
+                                                            aria-controls="password-tab-pane" aria-selected="false">
+                                                            Thay đổi mật khẩu
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="userTabContent">
+                                                    <!-- Tab cập nhật thông tin cá nhân -->
+                                                    <div class="tab-pane fade show active" id="info-tab-pane"
+                                                        role="tabpanel" aria-labelledby="info-tab">
+                                                        <h5 class="fw-bold mb-3 text-primary">Cập nhật thông tin cá
+                                                            nhân</h5>
+                                                        <form:form method="post" action="/client/user/update"
+                                                            modelAttribute="updateUser" enctype="multipart/form-data">
+                                                            <div class="row g-3">
+                                                                <div class="col-12 text-center mb-3">
+                                                                    <img class="rounded-circle border border-2"
+                                                                        style="width: 120px; height: 120px; object-fit: cover; display: none;"
                                                                         alt="avatar preview" id="avatarPreview">
                                                                 </div>
-
-                                                                <div class="mb-3">
-                                                                    <label class="form-label">Email
-                                                                        address</label>
+                                                                <div class="col-12">
+                                                                    <label class="form-label">Email</label>
                                                                     <form:input type="email" path="email"
-                                                                        Class="form-control" disabled="true" />
+                                                                        class="form-control" disabled="true" />
                                                                 </div>
-
-                                                                <div class="mb-3">
+                                                                <div class="col-12 col-md-6">
                                                                     <c:set var="errorPhone">
                                                                         <form:errors path="sdt"
                                                                             cssClass="invalid-feedback" />
                                                                     </c:set>
-                                                                    <label class="form-label">Phone
-                                                                        Number</label>
+                                                                    <label class="form-label">Số điện thoại</label>
                                                                     <form:input type="text" path="sdt"
-                                                                        Class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
+                                                                        class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" />
                                                                     ${errorPhone}
                                                                 </div>
-
-                                                                <div class="mb-3">
+                                                                <div class="col-12 col-md-6">
                                                                     <c:set var="errorName">
                                                                         <form:errors path="hoTen"
                                                                             cssClass="invalid-feedback" />
                                                                     </c:set>
-                                                                    <label class="form-label">Full
-                                                                        Name</label>
+                                                                    <label class="form-label">Họ tên</label>
                                                                     <form:input type="text" path="hoTen"
-                                                                        Class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
+                                                                        class="form-control ${not empty errorName ? 'is-invalid' : ''}" />
                                                                     ${errorName}
                                                                 </div>
-
-                                                                <div class="row">
-                                                                    <div class="mb-3 col-12 col-md-6">
-                                                                        <c:set var="errorAddress">
-                                                                            <form:errors path="diaChi"
-                                                                                cssClass="invalid-feedback" />
-                                                                        </c:set>
-                                                                        <label class="form-label">Address</label>
-                                                                        <form:input type="text" path="diaChi"
-                                                                            Class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
-                                                                        ${errorAddress}
-                                                                    </div>
-                                                                    <div class="mb-3 col-12 col-md-6">
-                                                                        <label for="avatarFile"
-                                                                            class="form-label">Avatar</label>
-                                                                        <input class="form-control" type="file"
-                                                                            id="avatarFile" name="hoidanitFile"
-                                                                            accept=".png, .jpg, .jpeg" />
-                                                                    </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <c:set var="errorAddress">
+                                                                        <form:errors path="diaChi"
+                                                                            cssClass="invalid-feedback" />
+                                                                    </c:set>
+                                                                    <label class="form-label">Địa chỉ</label>
+                                                                    <form:input type="text" path="diaChi"
+                                                                        class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" />
+                                                                    ${errorAddress}
                                                                 </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <label for="avatarFile" class="form-label">Ảnh đại
+                                                                        diện</label>
+                                                                    <input class="form-control" type="file"
+                                                                        id="avatarFile" name="hoidanitFile"
+                                                                        accept=".png, .jpg, .jpeg" />
+                                                                </div>
+                                                                <div class="col-12 text-end">
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-primary px-4 mt-2">Cập
+                                                                        nhật</button>
+                                                                </div>
+                                                            </div>
+                                                        </form:form>
+                                                    </div>
+                                                    <!-- Tab thay đổi mật khẩu -->
+                                                    <div class="tab-pane fade" id="password-tab-pane" role="tabpanel"
+                                                        aria-labelledby="password-tab">
+                                                        <h5 class="fw-bold mb-3 text-primary">Thay đổi mật khẩu</h5>
+                                                        <form:form method="post" action="/change-password"
+                                                            modelAttribute="thayDoiMatKhau">
 
-                                                                <button type="submit" style="float: right;"
-                                                                    class="btn btn-warning my-3">Update</button>
-                                                            </form:form>
-                                                        </div>
+                                                            <div class="mb-3">
+                                                                <label>Mật khẩu hiện tại:</label>
+                                                                <form:password path="matKhauHienTai"
+                                                                    class="form-control" />
+                                                                <form:errors path="matKhauHienTai"
+                                                                    cssClass="text-danger" />
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label>Mật khẩu mới:</label>
+                                                                <form:password path="matKhauMoi" class="form-control" />
+                                                                <form:errors path="matKhauMoi" cssClass="text-danger" />
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label>Xác nhận mật khẩu mới:</label>
+                                                                <form:password path="xacNhanMatKhauMoi"
+                                                                    class="form-control" />
+                                                                <form:errors path="xacNhanMatKhauMoi"
+                                                                    cssClass="text-danger" />
+                                                            </div>
+
+                                                            <c:if test="${not empty errorMessage}">
+                                                                <div class="alert alert-danger">${errorMessage}</div>
+                                                            </c:if>
+                                                            <c:if test="${not empty successMessage}">
+                                                                <div class="alert alert-success">${successMessage}</div>
+                                                            </c:if>
+
+                                                            <button type="submit" class="btn btn-outline-primary">Đổi
+                                                                mật
+                                                                khẩu</button>
+                                                        </form:form>
                                                     </div>
                                                 </div>
+                                                <script>
+                                                    // Khi bấm nút "Thay đổi mật khẩu"                                                                 ở sidebar thì chuyển sang tab đổi mật khẩu
+                                                    document.addEventListener("DOMContentLoaded", function () {
+                                                        const changePasswordTabBtn = document.getElementById('changePasswordTabBtn');
+                                                        if (changePasswordTabBtn) {
+                                                            changePasswordTabBtn.addEventListener('click', function (e) {
+                                                                e.preventDefault();
+                                                                const passwordTab = document.getElementById('password-tab');
+                                                                if (passwordTab) passwordTab.click();
+                                                            });
+                                                        }
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -267,8 +329,8 @@
                         <div class="container-fluid py-5 mt-5">
                             <div class="container py-5">
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item active"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active">Product detail</li>
+                                    <li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
+                                    <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
                                 </ol>
                                 <div class="row g-4 mb-5">
                                     <div class="col-lg-8 col-xl-9">
@@ -313,34 +375,40 @@
                                                     </div>
                                                 </div>
                                                 <p class="mb-4">Số Lượng: ${product.soLuong}</p>
-                                                <form action="/add-to-cart" method="post">
-                                                    <input type="hidden" name="${_csrf.parameterName}"
-                                                        value="${_csrf.token}" />
-                                                    <div class="form-group d-none">
-                                                        <label>Id:</label>
-                                                        <input class="form-control" type="text"
-                                                            value="${product.maSanPham}" name="id" />
-                                                    </div>
-                                                    <div class="form-group d-none">
-                                                        <label>Quantity:</label>
-                                                        <input class="form-control" type="text" name="quantity"
-                                                            id="chiTietGioHang0.soLuong" value="1" />
-                                                    </div>
-                                                    <button
-                                                        class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</button>
-                                                </form>
+                                                <!-- <form action="/add-to-cart" method="post"> -->
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+                                                <div class="form-group d-none">
+                                                    <label>Id:</label>
+                                                    <input class="form-control" type="text" value="${product.maSanPham}"
+                                                        name="id" />
+                                                </div>
+                                                <div class="form-group d-none">
+                                                    <label>Quantity:</label>
+                                                    <input class="form-control" type="text" name="quantity"
+                                                        id="chiTietGioHang0.soLuong" value="1" />
+                                                </div>
+                                                <button data-product-id="${product.maSanPham}"
+                                                    class="btnAddToCartDetail  btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
+                                                    cart</button>
+                                                <!-- </form> -->
                                             </div>
+                                            <c:if test="${not empty error}">
+                                                <div class="alert alert-danger">${error}</div>
+                                            </c:if>
+                                            <c:if test="${not empty message}">
+                                                <div class="alert alert-success">${message}</div>
+                                            </c:if>
                                             <div class="col-lg-12">
                                                 <nav>
                                                     <div class="nav nav-tabs mb-3">
                                                         <a href="#tab-1" data-bs-toggle="pill"
                                                             class="nav-link active border-white border-bottom-0"
-                                                            aria-selected="true">Description</a>
+                                                            aria-selected="true">Mô tả</a>
                                                         <a href="#tab-2" data-bs-toggle="pill"
                                                             class="nav-link border-white border-bottom-0" type="button"
-                                                            aria-selected="false">Reviews</a>
+                                                            aria-selected="false">Đánh giá</a>
                                                     </div>
                                                 </nav>
                                             </div>
@@ -391,10 +459,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <c:if test="${isAuthenticated}">
+                                            <!-- Nút đánh giá sản phẩm (hiển thị hoặc ẩn tùy theo điều kiện) -->
+                                            <!-- <c:choose>
+                                                <c:when test="${hasPurchased}">
+                                                    <p style="color: green;">Bạn đã mua sản phẩm này, bạn có thể đánh
+                                                        giá.</p>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <p style="color: red;">Bạn cần mua sản phẩm này trước khi đánh giá.
+                                                    </p>
+                                                </c:otherwise>
+                                            </c:choose> -->
+
+                                            <c:if test="${isAuthenticated && hasPurchased}">
                                                 <form:form action="/product/${id}/review" method="post"
                                                     modelAttribute="reviews">
-                                                    <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                                                    <h4 class="mb-5 fw-bold">Hãy đánh giá sản phẩm</h4>
                                                     <div class="row g-4">
                                                         <div class="col-lg-6 d-flex align-items-center"
                                                             style="min-width: 300px;">
@@ -410,14 +490,14 @@
                                                             <div class="border-bottom rounded">
                                                                 <textarea id="binhLuan" name="binhLuan"
                                                                     class="form-control border-0" cols="30" rows="4"
-                                                                    placeholder="Your Review *"
+                                                                    placeholder="Đánh giá của bạn *"
                                                                     spellcheck="false"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="d-flex justify-content-between py-3 mb-5">
                                                                 <div class="d-flex align-items-center">
-                                                                    <p class="mb-0 me-3">Please rate:</p>
+                                                                    <p class="mb-0 me-3">Vui lòng đánh giá:</p>
                                                                     <div class="d-flex align-items-center"
                                                                         style="font-size: 24px;">
                                                                         <i class="fa fa-star text-muted star"
@@ -435,7 +515,7 @@
                                                                         value="0">
                                                                 </div>
                                                                 <button type="submit"
-                                                                    class="btn btn-primary rounded-pill px-4 py-2">Gửi
+                                                                    class="btn btn-outline-primary rounded-pill px-4 py-2">Gửi
                                                                     đánh
                                                                     giá</button>
                                                             </div>
@@ -452,7 +532,7 @@
                                         <div class="row g-4 fruite">
                                             <div class="col-lg-12">
                                                 <div class="mb-4">
-                                                    <h4>Categories</h4>
+                                                    <h4>Danh mục</h4>
                                                     <ul class="list-unstyled fruite-categorie">
                                                         <li>
                                                             <div class="d-flex justify-content-between fruite-name">
@@ -546,6 +626,8 @@
 
                     <!-- Template Javascript -->
                     <script src="/client/js/main.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
                 </body>
 
                 </html>

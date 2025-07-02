@@ -1,6 +1,10 @@
 package vn.huyngo.phoneshop.domain;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "DONHANG")
@@ -25,11 +31,24 @@ public class DONHANG {
     private String maThanhToan;
     private String trangThaiThanhToan;
     private String hinhThucThanhToan;
+
+    // @Temporal(TemporalType.TIMESTAMP)
+    // private Date ngayDatHang;
+    private LocalDate ngayDatHang;
+
+    public LocalDate getNgayDatHang() {
+        return ngayDatHang;
+    }
+
+    public void setNgayDatHang(LocalDate ngayDatHang) {
+        this.ngayDatHang = ngayDatHang;
+    }
+
     @ManyToOne
     @JoinColumn(name = "maNguoiDung")
     private NGUOIDUNG nguoiDung;
 
-    @OneToMany(mappedBy = "donHang")
+    @OneToMany(mappedBy = "donHang", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CHITIETDONHANG> chiTietDonHang;
 
     public String getMaThanhToan() {
@@ -68,8 +87,8 @@ public class DONHANG {
         return tongGia;
     }
 
-    public void setTongGia(Double tongGia) {
-        this.tongGia = tongGia;
+    public void setTongGia(Double totalPrice) {
+        this.tongGia = totalPrice;
     }
 
     public NGUOIDUNG getNguoiDung() {

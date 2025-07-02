@@ -9,9 +9,8 @@
                     <meta charset="utf-8" />
                     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                     <meta name="author" content="Hỏi Dân IT" />
-                    <title>Dashboard</title>
+                    <title>Quản lý sản phẩm</title>
                     <link href="/css/styles.css" rel="stylesheet" />
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
                         crossorigin="anonymous"></script>
@@ -24,28 +23,28 @@
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid px-4">
-                                    <h1 class="mt-4">Manager product</h1>
+                                    <h1 class="mt-4">Quản lý sản phẩm</h1>
                                     <ol class="breadcrumb mb-4">
                                         <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Product</li>
+                                        <li class="breadcrumb-item active">Sản phẩm</li>
                                     </ol>
                                     <div>
                                         <div class="row">
                                             <div class="col-12 col-12 mx-auto">
                                                 <div class="d-flex justify-content-between">
-                                                    <h2>Table product</h3>
-                                                        <a href="/admin/product/create" class="btn btn-primary">Create a
-                                                            product</a>
+                                                    <h2>Bảng sản phẩm</h3>
+                                                        <a href="/admin/product/create" class="btn btn-primary">Tạo mới
+                                                            sản phẩm</a>
                                                 </div>
                                                 <hr />
                                                 <table class="table table-bordered table-hover">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">ID</th>
-                                                            <th scope="col">Name</th>
-                                                            <th scope="col">Price</th>
-                                                            <th scope="col">Factory</th>
-                                                            <th scope="col">Action</th>
+                                                            <th scope="col">Tên sản phẩm</th>
+                                                            <th scope="col">Giá</th>
+                                                            <th scope="col">Hãng</th>
+                                                            <th scope="col">Hành động</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -59,11 +58,11 @@
                                                                 </td>
                                                                 <td>${product.noiSanXuat}</td>
                                                                 <td><a href="/admin/product/${product.maSanPham}"
-                                                                        class="btn btn-success">View</a>
+                                                                        class="btn btn-success">Chi tiết</a>
                                                                     <a href="/admin/product/update/${product.maSanPham}"
-                                                                        class="btn btn-warning mx-2">Update</a>
+                                                                        class="btn btn-warning mx-2">cập nhật</a>
                                                                     <a href="/admin/product/delete/${product.maSanPham}"
-                                                                        class="btn btn-danger">Delete</a>
+                                                                        class="btn btn-danger">Xóa</a>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>

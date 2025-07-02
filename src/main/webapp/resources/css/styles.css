@@ -13176,3 +13176,48 @@ body {
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
 }
+
+.store-info,
+.customer-info {
+  margin-bottom: 20px;
+}
+
+.store-info p,
+.customer-info p {
+  margin: 4px 0;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+.total-row td {
+  font-weight: bold;
+}
+
+.note {
+  margin-top: 30px;
+  font-style: italic;
+}
+
+.thanks {
+  text-align: center;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.highlight {
+  background-color: #f2f2f2;
+}
+
+.container-invoice {
+  padding: 0 50px;
+}

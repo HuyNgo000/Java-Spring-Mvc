@@ -1,5 +1,6 @@
 package vn.huyngo.phoneshop.controller.admin;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.huyngo.phoneshop.domain.NGUOIDUNG;
 import vn.huyngo.phoneshop.domain.SANPHAM;
+import vn.huyngo.phoneshop.domain.dto.ChangePasswordDTO;
 import vn.huyngo.phoneshop.service.UploadService;
 import vn.huyngo.phoneshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
